@@ -57,7 +57,7 @@ export function Contact() {
                 <ContactRow
                   icon={<Github className="h-4 w-4" />}
                   label="GitHub"
-                  value={profile.github}
+                  value="github.com/prabhu9652"
                   href={profile.github}
                 />
               )}

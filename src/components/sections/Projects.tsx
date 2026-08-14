@@ -18,7 +18,7 @@ export function Projects() {
       <SectionHeader
         eyebrow="Featured Engineering Projects"
         title="Production systems I've designed and operated"
-        description="Case studies spanning multi-account AWS platforms, Kubernetes delivery, cloud migrations, observability, security and AI systems."
+        description="Case studies spanning multi-account AWS platforms, Kubernetes delivery, cloud migrations, observability, security, disaster recovery, compliance automation and AI systems."
       />
 
       {/* Filters */}
@@ -42,6 +42,7 @@ export function Projects() {
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => {
             const open = expanded === project.id;
+            const hasFlow = 'flow' in project && Array.isArray(project.flow);
             return (
               <motion.div
                 key={project.id}
@@ -95,6 +96,27 @@ export function Projects() {
                             </li>
                           ))}
                         </ul>
+
+                        {/* Flow visualization for DR and SOC 2 projects */}
+                        {hasFlow && (
+                          <div className="mt-5">
+                            <div className="mb-3 font-mono text-xs uppercase tracking-wider text-muted">
+                              Engineering flow
+                            </div>
+                            <div className="flex flex-wrap items-center gap-2">
+                              {(project as typeof project & { flow: string[] }).flow.map((step, si, arr) => (
+                                <div key={step} className="flex items-center gap-2">
+                                  <span className="rounded-lg border border-default bg-[rgb(var(--bg))] px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
+                                    {step}
+                                  </span>
+                                  {si < arr.length - 1 && (
+                                    <span className="text-accent-500/50">→</span>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   )}

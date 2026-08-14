@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Mail } from 'lucide-react';
+import { ArrowRight, Download, Github, Linkedin } from 'lucide-react';
 import { heroStats, profile } from '@/data/portfolio';
 import { downloadResume } from '@/utils/resume';
 
@@ -28,12 +28,13 @@ export function Hero() {
 
       <div className="container-max section-padding">
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-4xl">
+          {/* Availability badge */}
           <motion.div variants={item} className="mb-6 inline-flex items-center gap-2 rounded-full border border-default bg-elev px-3 py-1.5">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-500 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-500" />
             </span>
-            <span className="text-xs text-muted">Available for SRE / DevOps / Cloud roles</span>
+            <span className="text-xs text-muted">Available for SRE, DevOps, DevSecOps, Cloud &amp; Platform Engineering roles</span>
           </motion.div>
 
           <motion.h1 variants={item} className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
@@ -52,12 +53,13 @@ export function Hero() {
             {profile.description}
           </motion.p>
 
+          {/* CTAs */}
           <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">
             <a
               href="#projects"
               className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-5 py-2.5 text-sm font-medium text-ink-950 transition-colors hover:bg-accent-400"
             >
-              View My Work
+              View My Engineering Work
               <ArrowRight className="h-4 w-4" />
             </a>
             <button
@@ -68,11 +70,22 @@ export function Hero() {
               Download Resume
             </button>
             <a
-              href="#contact"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-colors hover:text-[rgb(var(--text))] hover:border-accent-500/40"
             >
-              <Mail className="h-4 w-4" />
-              Let's Connect
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </a>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-colors hover:text-[rgb(var(--text))] hover:border-accent-500/40"
+            >
+              <Github className="h-4 w-4" />
+              GitHub
             </a>
           </motion.div>
         </motion.div>

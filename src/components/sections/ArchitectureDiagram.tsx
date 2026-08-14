@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Cloud,
+  ClipboardCheck,
   Database,
   Eye,
   GitBranch,
+  Globe,
   Layers,
+  LifeBuoy,
   Lock,
   Server,
+  ShieldAlert,
   Users,
   Zap,
 } from 'lucide-react';
@@ -22,6 +26,14 @@ type Node = {
 
 const layers: { title: string; nodes: Node[] }[] = [
   {
+    title: 'Cloud Platforms',
+    nodes: [
+      { id: 'aws', label: 'AWS', icon: Cloud, detail: 'Primary cloud — EC2, EKS, Lambda, S3, RDS, CloudFront, Route 53' },
+      { id: 'azure', label: 'Azure', icon: Globe, detail: 'AKS, Azure services and multi-cloud workloads' },
+      { id: 'gcp', label: 'GCP / DigitalOcean', icon: Globe, detail: 'GKE, GCP services and DigitalOcean compute' },
+    ],
+  },
+  {
     title: 'Edge',
     nodes: [
       { id: 'users', label: 'Users', icon: Users, detail: 'End users and API consumers' },
@@ -32,36 +44,56 @@ const layers: { title: string; nodes: Node[] }[] = [
   {
     title: 'Compute',
     nodes: [
-      { id: 'eks', label: 'Kubernetes / EKS', icon: Layers, detail: 'Container orchestration' },
-      { id: 'helm', label: 'Helm / ArgoCD', icon: GitBranch, detail: 'GitOps delivery' },
-      { id: 'serverless', label: 'Lambda / API', icon: Server, detail: 'Serverless compute' },
+      { id: 'eks', label: 'Kubernetes / EKS', icon: Layers, detail: 'Container orchestration on EKS, AKS, GKE and RKE2' },
+      { id: 'helm', label: 'Helm / ArgoCD', icon: GitBranch, detail: 'GitOps delivery and application lifecycle' },
+      { id: 'beanstalk', label: 'Elastic Beanstalk', icon: Server, detail: 'Managed application platform — deployment, environment config and operational management' },
     ],
   },
   {
     title: 'Data',
     nodes: [
-      { id: 'db', label: 'Aurora / PostgreSQL', icon: Database, detail: 'Relational data' },
-      { id: 'cache', label: 'Redis', icon: Zap, detail: 'Caching layer' },
+      { id: 'db', label: 'Aurora / PostgreSQL', icon: Database, detail: 'Relational data — Aurora PostgreSQL and MySQL' },
+      { id: 'cache', label: 'Redis', icon: Zap, detail: 'Caching and session layer' },
       { id: 'mongo', label: 'MongoDB', icon: Database, detail: 'Document store' },
     ],
   },
   {
     title: 'Observability',
     nodes: [
-      { id: 'obs1', label: 'CloudWatch / Prometheus', icon: Eye, detail: 'Metrics collection' },
-      { id: 'obs2', label: 'Grafana / Loki / ELK', icon: Eye, detail: 'Dashboards and logs' },
+      { id: 'obs1', label: 'CloudWatch / Prometheus', icon: Eye, detail: 'Metrics collection and alerting' },
+      { id: 'obs2', label: 'Grafana / Loki / ELK', icon: Eye, detail: 'Dashboards, log aggregation and search' },
     ],
   },
   {
-    title: 'Security',
+    title: 'DevSecOps',
     nodes: [
-      { id: 'sec1', label: 'IAM / WAF / GuardDuty', icon: Lock, detail: 'Identity and threat detection' },
-      { id: 'sec2', label: 'Security Hub / KMS / Secrets Manager', icon: Lock, detail: 'Compliance and secrets' },
+      { id: 'scan', label: 'Trivy / SonarQube', icon: ShieldAlert, detail: 'Container and code security scanning in CI/CD pipelines' },
+      { id: 'sec1', label: 'IAM / WAF / GuardDuty', icon: Lock, detail: 'Identity, edge security and threat detection' },
+      { id: 'sec2', label: 'Security Hub / KMS / Secrets Manager', icon: Lock, detail: 'Compliance posture, encryption and secrets lifecycle' },
+    ],
+  },
+  {
+    title: 'Resilience',
+    nodes: [
+      { id: 'res1', label: 'Backup / Recovery', icon: LifeBuoy, detail: 'Backup strategies and restore validation' },
+      { id: 'res2', label: 'Disaster Recovery', icon: LifeBuoy, detail: 'DR planning, recovery procedures and validation' },
+      { id: 'res3', label: 'Operational Readiness', icon: LifeBuoy, detail: 'Recovery exercises and business continuity' },
+    ],
+  },
+  {
+    title: 'Compliance',
+    nodes: [
+      { id: 'comp1', label: 'Security Controls', icon: ClipboardCheck, detail: 'Infrastructure controls aligned with SOC 2 requirements' },
+      { id: 'comp2', label: 'Automation / Scripts', icon: ClipboardCheck, detail: 'Automated evidence collection and validation' },
+      { id: 'comp3', label: 'Drata / SOC 2', icon: ClipboardCheck, detail: 'Compliance workflows, evidence management and audit readiness' },
     ],
   },
   {
     title: 'Infrastructure',
-    nodes: [{ id: 'iac', label: 'Terraform / Terragrunt', icon: Layers, detail: 'Infrastructure as Code' }],
+    nodes: [
+      { id: 'iac', label: 'Terraform / Terragrunt', icon: Layers, detail: 'Infrastructure as Code — multi-cloud, reusable modules' },
+      { id: 'cicd', label: 'GitHub Actions / GitLab CI', icon: GitBranch, detail: 'CI/CD pipelines and deployment automation' },
+    ],
   },
 ];
 
@@ -71,9 +103,9 @@ export function ArchitectureDiagram() {
   return (
     <Section id="architecture" className="border-t border-default">
       <SectionHeader
-        eyebrow="SRE / DevOps Architecture"
+        eyebrow="SRE / DevOps / DevSecOps Architecture"
         title="A full production platform, end to end"
-        description="An interactive view of the layered architecture — from edge through compute, data, observability, security and infrastructure. Hover or tap a node to see its role."
+        description="An interactive view of the layered architecture — from multi-cloud platforms through compute, data, observability, DevSecOps, resilience, compliance and infrastructure. Hover or tap a node to see its role."
       />
 
       <div className="mt-12 space-y-3">
@@ -83,7 +115,7 @@ export function ArchitectureDiagram() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.4, delay: li * 0.06 }}
+            transition={{ duration: 0.4, delay: li * 0.05 }}
           >
             <div className="mb-2 flex items-center gap-3">
               <span className="font-mono text-xs uppercase tracking-wider text-accent-500">{layer.title}</span>
@@ -110,7 +142,11 @@ export function ArchitectureDiagram() {
                     </div>
                     <div className="min-w-0">
                       <div className="truncate text-sm font-medium">{node.label}</div>
-                      <div className={`text-xs text-muted transition-all ${isActive ? 'opacity-100' : 'opacity-0 h-0'}`}>
+                      <div
+                        className={`overflow-hidden text-xs text-muted transition-all duration-200 ${
+                          isActive ? 'max-h-20 opacity-100 mt-0.5' : 'max-h-0 opacity-0'
+                        }`}
+                      >
                         {node.detail}
                       </div>
                     </div>

@@ -2,13 +2,16 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
+import { EngineeringDomains } from '@/components/sections/EngineeringDomains';
 import { Philosophy } from '@/components/sections/Philosophy';
 import { TechStack } from '@/components/sections/TechStack';
 import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
-import { Development } from '@/components/sections/Development';
+import { SecurityResilience } from '@/components/sections/SecurityResilience';
 import { AIEngineering } from '@/components/sections/AIEngineering';
 import { ArchitectureDiagram } from '@/components/sections/ArchitectureDiagram';
+import { Development } from '@/components/sections/Development';
+import { WhatIBring } from '@/components/sections/WhatIBring';
 import { ContinuousLearning } from '@/components/sections/ContinuousLearning';
 import { GitHubSection } from '@/components/sections/GitHubSection';
 import { Resume } from '@/components/sections/Resume';
@@ -24,13 +27,16 @@ function App() {
       <main>
         <Hero />
         <About />
+        <EngineeringDomains />
         <Philosophy />
         <TechStack />
         <Experience />
         <Projects />
+        <SecurityResilience />
         <AIEngineering />
         <ArchitectureDiagram />
         <Development />
+        <WhatIBring />
         <ContinuousLearning />
         <GitHubSection />
         <Resume />

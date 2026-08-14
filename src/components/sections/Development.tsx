@@ -12,6 +12,14 @@ export function Development() {
         {development.quote}
       </blockquote>
 
+      <div className="mt-6 max-w-3xl rounded-xl border border-accent-500/20 bg-accent-500/5 p-4 sm:p-5">
+        <div className="mb-2 font-mono text-xs uppercase tracking-wider text-accent-500">I Automate Operational & Compliance Work</div>
+        <p className="text-sm leading-relaxed text-muted">
+          My engineering work extends beyond infrastructure deployment. I build automation that supports operational
+          workflows, security validation, disaster recovery processes and compliance evidence collection.
+        </p>
+      </div>
+
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {development.groups.map((group, i) => (
           <motion.div

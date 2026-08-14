@@ -12,7 +12,7 @@ export function Experience() {
       <SectionHeader
         eyebrow="Professional Experience"
         title="A career built on reliability and automation"
-        description="Nine years progressing from Linux and automation foundations into senior SRE and cloud platform engineering — with AI engineering as a growing capability."
+        description="Nine years progressing from Linux and automation foundations into senior SRE and cloud platform engineering — with security, disaster recovery, compliance automation and AI engineering as growing capabilities."
       />
 
       <div className="mt-12 space-y-3">

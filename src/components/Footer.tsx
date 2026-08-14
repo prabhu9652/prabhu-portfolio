@@ -1,4 +1,4 @@
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { profile } from '@/data/portfolio';
 
 export function Footer() {
@@ -16,9 +16,33 @@ export function Footer() {
             </div>
           </div>
 
-          <p className="text-center text-xs text-muted">
-            Built with reliability, automation and intent.
-          </p>
+          <div className="flex items-center gap-3">
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+            >
+              <Linkedin className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+            >
+              <Github className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              aria-label="Email"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+            >
+              <Mail className="h-3.5 w-3.5" />
+            </a>
+          </div>
 
           <a
             href="#hero"
