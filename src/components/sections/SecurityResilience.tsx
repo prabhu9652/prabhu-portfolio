@@ -1,26 +1,21 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { additionalExperience, securityResilienceCards } from '@/data/portfolio';
+import { securityResilienceCards } from '@/data/portfolio';
 import { Icon } from '@/components/ui/Icon';
 import { Section, SectionHeader } from '@/components/ui/Section';
 
-const drFlow = [
-  'Reliability',
-  'Resilience',
-  'Backup & Recovery',
-  'Disaster Recovery',
-  'Recovery Validation',
-  'Operational Readiness',
+const securityTools = [
+  'AWS IAM', 'AWS WAF', 'GuardDuty', 'Inspector',
+  'Security Hub', 'KMS', 'Secrets Manager', 'AWS Config',
+  'Trivy', 'SonarQube',
 ];
 
-const soc2Flow = [
-  'Cloud Infrastructure',
-  'Security Controls',
-  'Automated Scripts',
-  'Evidence Collection',
-  'Drata',
-  'SOC 2 Evidence',
-  'Audit Readiness',
+const drFlow = [
+  'Production',
+  'Backup Mechanisms',
+  'DR Environment',
+  'Recovery Trigger',
+  'Validation',
+  'Operational Readiness',
 ];
 
 const devSecOpsFlow = [
@@ -29,9 +24,18 @@ const devSecOpsFlow = [
   'Code Scan',
   'Container Scan',
   'Security Validation',
-  'Deployment',
+  'Deploy',
   'Runtime Security',
   'Monitoring',
+];
+
+const soc2Flow = [
+  'Infrastructure Controls',
+  'Automation Scripts',
+  'Evidence Collection',
+  'Drata',
+  'SOC 2 Evidence',
+  'Audit Readiness',
 ];
 
 export function SecurityResilience() {
@@ -40,32 +44,29 @@ export function SecurityResilience() {
       <SectionHeader
         eyebrow="Security & DR"
         title="Security engineering and disaster recovery"
-        description="Building secure and resilient cloud environments through infrastructure security, security automation, disaster recovery planning, backup and recovery practices, and operational readiness."
+        description="Security is embedded into the delivery lifecycle, not bolted on at the end. Disaster recovery is planned, tested and validated — not improvised during an incident."
       />
 
-      {/* Three capability cards */}
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
+      {/* Three high-level capability cards */}
+      <div className="mt-12 grid gap-3 md:grid-cols-3">
         {securityResilienceCards.map((card, i) => (
           <motion.div
             key={card.title}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="group relative overflow-hidden rounded-2xl border border-default bg-elev p-6 transition-colors hover:border-accent-500/30"
+            transition={{ duration: 0.45, delay: i * 0.1 }}
+            className="group relative overflow-hidden rounded-xl border border-default bg-elev p-5 transition-all hover:border-accent-500/40 hover:-translate-y-0.5"
           >
-            <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-accent-500/5 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-default bg-[rgb(var(--bg))] text-accent-500">
-              <Icon name={card.icon} className="h-5 w-5" />
+            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-accent-500/5 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-default bg-[rgb(var(--bg))] text-accent-500">
+              <Icon name={card.icon} className="h-4 w-4" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold">{card.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{card.description}</p>
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            <h3 className="mt-3.5 text-sm font-semibold">{card.title}</h3>
+            <p className="mt-1.5 text-xs leading-relaxed text-muted">{card.description}</p>
+            <div className="mt-3 flex flex-wrap gap-1">
               {card.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-md border border-default bg-[rgb(var(--bg))] px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted"
-                >
+                <span key={tag} className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] text-muted">
                   {tag}
                 </span>
               ))}
@@ -74,83 +75,74 @@ export function SecurityResilience() {
         ))}
       </div>
 
-      {/* Detailed breakdown */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-6 overflow-hidden rounded-2xl border border-default bg-elev"
-      >
-        <div className="border-b border-default p-5 sm:p-6">
-          <div className="font-mono text-xs uppercase tracking-wider text-accent-500">
-            {additionalExperience.subtitle}
+      {/* Two-column split: Security tools list + DR flow */}
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        {/* Security tooling */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.45 }}
+          className="rounded-xl border border-default bg-elev p-5"
+        >
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Security Engineering</p>
+          <div className="flex flex-wrap gap-1.5">
+            {securityTools.map((t) => (
+              <span key={t} className="rounded-lg border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default">
+                {t}
+              </span>
+            ))}
           </div>
-          <h3 className="mt-2 text-lg font-semibold">{additionalExperience.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted">{additionalExperience.description}</p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-px bg-[rgb(var(--border))] sm:grid-cols-3">
-          {additionalExperience.areas.map((area, i) => (
-            <motion.div
-              key={area.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-elev p-5 sm:p-6"
-            >
-              <div className="flex items-center gap-2 text-accent-500">
-                <Icon name={area.icon} className="h-4 w-4" />
-                <span className="font-mono text-xs font-medium uppercase tracking-wider">{area.title}</span>
+        {/* DR lifecycle */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.45, delay: 0.06 }}
+          className="rounded-xl border border-default bg-elev p-5"
+        >
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Disaster Recovery</p>
+          <div className="flex flex-col gap-1.5">
+            {drFlow.map((step, i, arr) => (
+              <div key={step} className="flex items-center gap-1.5">
+                <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-3 py-1 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default">
+                  {step}
+                </span>
+                {i < arr.length - 1 && <span className="text-accent-500/40 text-xs" aria-hidden="true">↓</span>}
               </div>
-              <ul className="mt-4 space-y-2.5">
-                {area.points.map((point) => (
-                  <li key={point} className="flex gap-2.5 text-xs leading-relaxed text-muted">
-                    <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-500/50" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
 
-      {/* Engineering flows */}
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {/* DevSecOps flow */}
-        <FlowCard label="DevSecOps pipeline" steps={devSecOpsFlow} />
-        {/* DR flow */}
-        <FlowCard label="Disaster recovery lifecycle" steps={drFlow} vertical />
-        {/* SOC 2 flow */}
-        <FlowCard label="SOC 2 compliance automation" steps={soc2Flow} />
+      {/* Bottom row: DevSecOps pipeline + SOC 2 flow */}
+      <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <FlowStrip label="DevSecOps pipeline" steps={devSecOpsFlow} />
+        <FlowStrip label="SOC 2 compliance automation" steps={soc2Flow} />
       </div>
     </Section>
   );
 }
 
-function FlowCard({ label, steps, vertical = false }: { label: string; steps: string[]; vertical?: boolean }) {
+function FlowStrip({ label, steps }: { label: string; steps: string[] }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5 }}
-      className="overflow-hidden rounded-2xl border border-default bg-elev p-5 sm:p-6"
+      transition={{ duration: 0.45 }}
+      className="rounded-xl border border-default bg-elev p-5"
     >
-      <div className="mb-4 font-mono text-xs uppercase tracking-wider text-muted">{label}</div>
-      <div className={`flex gap-2 ${vertical ? 'flex-col' : 'flex-wrap items-center'}`}>
+      <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">{label}</p>
+      <div className="flex flex-wrap items-center gap-1.5">
         {steps.map((step, i, arr) => (
-          <div key={step} className={`flex items-center gap-2 ${vertical ? '' : ''}`}>
-            <span className="rounded-lg border border-default bg-[rgb(var(--bg))] px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
+          <div key={step} className="flex items-center gap-1.5">
+            <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default">
               {step}
             </span>
-            {i < arr.length - 1 && (
-              <span className={`text-accent-500/50 ${vertical ? 'self-center' : ''}`}>
-                {vertical ? '↓' : '→'}
-              </span>
-            )}
+            {i < arr.length - 1 && <span className="text-accent-500/40 text-xs" aria-hidden="true">→</span>}
           </div>
         ))}
       </div>

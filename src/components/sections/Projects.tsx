@@ -16,21 +16,22 @@ export function Projects() {
   return (
     <Section id="projects" className="border-t border-default">
       <SectionHeader
-        eyebrow="Featured Engineering Projects"
-        title="Production systems I've designed and operated"
-        description="Case studies spanning multi-account AWS platforms, Kubernetes delivery, cloud migrations, observability, security, disaster recovery, compliance automation and AI systems."
+        eyebrow="Projects"
+        title="Engineering case studies"
+        description="Eight production systems — each showing architecture decisions, technologies used and engineering challenges solved."
       />
 
-      {/* Filters */}
-      <div className="mt-8 flex flex-wrap gap-2">
+      {/* Filter bar */}
+      <div className="mt-8 flex flex-wrap gap-1.5" role="group" aria-label="Filter projects by category">
         {projectCategories.map((cat) => (
           <button
             key={cat}
-            onClick={() => setFilter(cat)}
-            className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
+            onClick={() => { setFilter(cat); setExpanded(null); }}
+            aria-pressed={filter === cat}
+            className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
               filter === cat
                 ? 'border-accent-500/40 bg-accent-500/10 text-accent-500'
-                : 'border-default bg-elev text-muted hover:text-[rgb(var(--text))] hover:border-accent-500/30'
+                : 'border-default bg-elev text-muted hover:border-accent-500/30 hover:text-[rgb(var(--text))]'
             }`}
           >
             {cat}
@@ -38,83 +39,90 @@ export function Projects() {
         ))}
       </div>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className="mt-6 grid gap-3 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => {
             const open = expanded === project.id;
             const hasFlow = 'flow' in project && Array.isArray(project.flow);
+            const hasAchievement = 'achievement' in project && project.achievement;
+
             return (
-              <motion.div
+              <motion.article
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.3, delay: i * 0.04 }}
-                className={`group flex flex-col overflow-hidden rounded-2xl border bg-elev transition-colors ${
-                  open ? 'border-accent-500/30' : 'border-default hover:border-accent-500/20'
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.25, delay: i * 0.03 }}
+                className={`flex flex-col overflow-hidden rounded-xl border bg-elev transition-colors ${
+                  open ? 'border-accent-500/40' : 'border-default hover:border-accent-500/20'
                 }`}
               >
+                {/* Card header — always visible */}
                 <button
                   onClick={() => setExpanded(open ? null : project.id)}
-                  className="flex items-start justify-between gap-4 p-5 text-left sm:p-6"
+                  aria-expanded={open}
+                  className="flex items-start justify-between gap-4 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500 sm:p-6"
                 >
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs text-accent-500">{project.id}</span>
-                      <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-mono text-[11px] font-medium text-accent-500/80">{project.id}</span>
+                      <span className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
                         {project.category}
                       </span>
                     </div>
-                    <h3 className="mt-3 text-lg font-semibold">{project.title}</h3>
-                    <p className="mt-1 font-mono text-xs text-muted">{project.subtitle}</p>
+                    <h3 className="mt-2.5 text-base font-semibold">{project.title}</h3>
+                    <p className="mt-0.5 text-xs text-muted">{project.subtitle}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.description}</p>
                   </div>
                   <ChevronDown
-                    className={`mt-1 h-5 w-5 shrink-0 text-muted transition-transform ${open ? 'rotate-180' : ''}`}
+                    className={`mt-0.5 h-4 w-4 shrink-0 text-muted/60 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
                   />
                 </button>
 
-                <div className="px-5 sm:px-6">
-                  <p className="text-sm leading-relaxed text-muted">{project.description}</p>
-                </div>
-
+                {/* Expandable detail */}
                 <AnimatePresence initial={false}>
                   {open && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-5 pt-4 sm:px-6">
-                        <ul className="space-y-2">
+                      <div className="px-5 pb-5 pt-1 sm:px-6">
+                        <ul className="space-y-1.5" aria-label="Project details">
                           {project.points.map((pt) => (
-                            <li key={pt} className="flex gap-3 text-sm text-muted">
-                              <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-accent-500/60" />
+                            <li key={pt} className="flex gap-2.5 text-sm text-muted">
+                              <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-500/60" aria-hidden="true" />
                               {pt}
                             </li>
                           ))}
                         </ul>
 
-                        {/* Flow visualization for DR and SOC 2 projects */}
+                        {/* Engineering flow */}
                         {hasFlow && (
-                          <div className="mt-5">
-                            <div className="mb-3 font-mono text-xs uppercase tracking-wider text-muted">
-                              Engineering flow
-                            </div>
-                            <div className="flex flex-wrap items-center gap-2">
+                          <div className="mt-4">
+                            <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted">Flow</p>
+                            <div className="flex flex-wrap items-center gap-1.5">
                               {(project as typeof project & { flow: string[] }).flow.map((step, si, arr) => (
-                                <div key={step} className="flex items-center gap-2">
-                                  <span className="rounded-lg border border-default bg-[rgb(var(--bg))] px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
+                                <div key={step} className="flex items-center gap-1.5">
+                                  <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted hover:border-accent-500/40 hover:text-[rgb(var(--text))] transition-colors cursor-default">
                                     {step}
                                   </span>
-                                  {si < arr.length - 1 && (
-                                    <span className="text-accent-500/50">→</span>
-                                  )}
+                                  {si < arr.length - 1 && <span className="text-accent-500/40 text-xs" aria-hidden="true">→</span>}
                                 </div>
                               ))}
                             </div>
+                          </div>
+                        )}
+
+                        {/* Achievement */}
+                        {hasAchievement && (
+                          <div className="mt-4 rounded-lg border border-accent-500/20 bg-accent-500/5 p-3">
+                            <p className="text-xs font-medium text-accent-500">{(project as typeof project & { achievement: { title: string; detail: string } }).achievement.title}</p>
+                            <p className="mt-1 text-xs leading-relaxed text-muted">{(project as typeof project & { achievement: { title: string; detail: string } }).achievement.detail}</p>
                           </div>
                         )}
                       </div>
@@ -122,14 +130,13 @@ export function Projects() {
                   )}
                 </AnimatePresence>
 
-                <div className="mt-auto flex flex-wrap gap-1.5 border-t border-default px-5 py-4 sm:px-6">
+                {/* Stack tags — always visible */}
+                <div className="mt-auto flex flex-wrap gap-1.5 border-t border-default px-5 py-3 sm:px-6">
                   {project.stack.map((s) => (
-                    <span key={s} className="tag">
-                      {s}
-                    </span>
+                    <span key={s} className="tag">{s}</span>
                   ))}
                 </div>
-              </motion.div>
+              </motion.article>
             );
           })}
         </AnimatePresence>

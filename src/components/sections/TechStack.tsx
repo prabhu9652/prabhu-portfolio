@@ -2,33 +2,70 @@ import { motion } from 'framer-motion';
 import { techStack } from '@/data/portfolio';
 import { Section, SectionHeader } from '@/components/ui/Section';
 
+// Production engineering lifecycle — shown as an architecture flow strip
+const lifecycle = [
+  'Cloud (AWS / Azure / GCP)',
+  'IaC (Terraform)',
+  'Kubernetes',
+  'CI/CD',
+  'Deploy',
+  'Observability',
+  'Security',
+  'DR / Recovery',
+];
+
 export function TechStack() {
   return (
-    <Section id="expertise" className="border-t border-default">
+    <Section id="stack" className="border-t border-default">
       <SectionHeader
         eyebrow="Technology Stack"
-        title="Tools across the cloud-native landscape"
-        description="Organized by domain — from cloud and infrastructure through containers, CI/CD, observability, security, databases, programming and AI engineering."
+        title="Tools across the full platform lifecycle"
+        description="Organized by engineering domain — not an exhaustive list, but the technologies I use daily to design, automate and operate production systems."
       />
 
-      <div className="mt-12 space-y-8">
+      {/* Architecture lifecycle strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.5 }}
+        className="mt-10 overflow-x-auto"
+      >
+        <div className="flex min-w-max items-center gap-0 rounded-xl border border-default bg-elev">
+          {lifecycle.map((stage, i) => (
+            <div key={stage} className="flex items-center">
+              <div className={`px-4 py-3 text-xs font-medium transition-colors hover:text-accent-500 ${
+                i === 0 ? 'text-accent-500' : 'text-muted'
+              }`}>
+                {stage}
+              </div>
+              {i < lifecycle.length - 1 && (
+                <span className="text-accent-500/30 text-sm" aria-hidden="true">›</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Domain groups */}
+      <div className="mt-8 space-y-6">
         {techStack.map((group, gi) => (
           <motion.div
             key={group.category}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: gi * 0.05 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.45, delay: gi * 0.04 }}
           >
-            <div className="flex items-center gap-3">
-              <h3 className="font-mono text-sm font-medium text-accent-500">{group.category}</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-accent-500">{group.category}</h3>
               <div className="h-px flex-1 bg-[rgb(var(--border))]" />
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {group.items.map((item) => (
                 <span
                   key={item}
-                  className="group inline-flex cursor-default items-center rounded-lg border border-default bg-elev px-3 py-1.5 text-sm text-muted transition-all hover:-translate-y-0.5 hover:border-accent-500/40 hover:text-[rgb(var(--text))]"
+                  className="inline-flex items-center rounded-lg border border-default bg-elev px-3 py-1.5 text-sm text-muted transition-all hover:-translate-y-0.5 hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default"
                 >
                   {item}
                 </span>

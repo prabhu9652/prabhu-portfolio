@@ -4,17 +4,14 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 import { navLinks, profile } from '@/data/portfolio';
 import { useActiveSection } from '@/hooks/useActiveSection';
 
-// Must include every section id that has a nav link.
 const sectionIds = [
   'hero',
   'about',
-  'expertise',
   'experience',
   'projects',
+  'stack',
   'security-dr',
   'ai',
-  'engineering',
-  'education',
   'contact',
 ];
 

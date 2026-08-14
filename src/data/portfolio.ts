@@ -14,10 +14,10 @@ export const profile = {
 
 export const heroStats = [
   { label: 'Years Experience', value: '9+' },
-  { label: 'Cloud Providers', value: 'AWS · Azure · GCP · DO' },
-  { label: 'Cloud Native', value: 'Kubernetes' },
-  { label: 'Discipline', value: 'SRE · DevOps · DevSecOps' },
-  { label: 'AI Systems', value: 'RAG · Agentic' },
+  { label: 'Cloud', value: 'AWS · Azure · GCP' },
+  { label: 'Kubernetes', value: 'EKS · AKS · GKE · RKE2' },
+  { label: 'IaC', value: 'Terraform · Terragrunt' },
+  { label: 'Focus', value: 'SRE · DevOps · DevSecOps' },
 ];
 
 export const capabilities = [
@@ -269,232 +269,141 @@ export const experience = [
   },
 ];
 
-export const additionalExperience = {
-  title: 'Security, Resilience & Compliance',
-  subtitle: 'Cross-cutting engineering responsibilities',
-  description:
-    'Engineering work spanning DevSecOps controls, disaster recovery and compliance automation — applied as part of production SRE responsibilities, not as a standalone function.',
-  areas: [
-    {
-      icon: 'ShieldAlert',
-      title: 'DevSecOps',
-      points: [
-        'Security integrated into CI/CD pipelines through Trivy container scanning and SonarQube code quality.',
-        'AWS security controls: IAM least privilege, WAF, GuardDuty, Inspector, Security Hub.',
-        'KMS encryption and Secrets Manager for data protection and secrets lifecycle.',
-        'Continuous security monitoring and threat detection across cloud environments.',
-        'Security validation and policy enforcement embedded in delivery workflows.',
-      ],
-    },
-    {
-      icon: 'RefreshCw',
-      title: 'Disaster Recovery',
-      points: [
-        'Disaster recovery planning and recovery architecture for cloud workloads.',
-        'Backup and restore strategy design, implementation and validation.',
-        'Recovery procedure documentation and operational readiness validation.',
-        'Infrastructure and application recovery processes across AWS environments.',
-        'Business continuity support and failure preparedness for critical production systems.',
-      ],
-    },
-    {
-      icon: 'ClipboardCheck',
-      title: 'Compliance Automation',
-      points: [
-        'Supporting SOC 2 compliance through infrastructure security controls and evidence collection.',
-        'Developed scripts and automation for SOC 2 evidence collection and validation.',
-        'Compliance workflow integration with Drata for evidence management.',
-        'Audit readiness support through consistent, repeatable compliance processes.',
-        'Access and configuration validation aligned with compliance control requirements.',
-      ],
-    },
-  ],
-};
-
 export const projects = [
   {
     id: '01',
     category: 'Infrastructure',
     title: 'Multi-Account AWS Platform',
-    subtitle: 'Terraform + Terragrunt + AWS',
+    subtitle: 'Terraform · Terragrunt · AWS Organizations',
     description:
-      'A standardized multi-account AWS platform built with Infrastructure as Code — enabling environment consistency, reusable modules, automated deployment, security guardrails and operational consistency.',
+      'Standardized multi-account AWS platform built with Infrastructure as Code — environment consistency, reusable modules, automated pipelines and security guardrails baked into the baseline.',
     points: [
-      'Multi-account architecture with separation of concerns across environments',
-      'Reusable Terraform modules orchestrated with Terragrunt',
-      'Environment standardization and automated deployment pipelines',
-      'Security controls and guardrails baked into the platform baseline',
-      'Operational consistency across accounts and regions',
+      'Multi-account architecture with workload isolation and SCPs',
+      'Reusable Terraform modules orchestrated with Terragrunt workspaces',
+      'Automated account vending and environment bootstrapping via CI/CD',
+      'Security controls, tagging standards and cost allocation baked into modules',
+      'Consistent baseline across dev, staging and production accounts',
     ],
-    stack: ['AWS', 'Terraform', 'Terragrunt'],
+    stack: ['AWS', 'Terraform', 'Terragrunt', 'AWS Organizations', 'IAM'],
   },
   {
     id: '02',
     category: 'Kubernetes',
-    title: 'Kubernetes / EKS Platform',
-    subtitle: 'AWS EKS + Kubernetes + Helm + ArgoCD',
+    title: 'Hybrid Kubernetes Platform',
+    subtitle: 'EKS · RKE2 · Helm · ArgoCD · GitOps',
     description:
-      'Production Kubernetes platform on EKS delivering containerized workloads through GitOps — with Helm-based deployments, application lifecycle management, autoscaling, observability and secrets management.',
+      'Production Kubernetes spanning EKS on AWS and RKE2 on-premises under a unified GitOps delivery model — with Helm lifecycle management, autoscaling, secrets synchronization and full observability.',
     points: [
-      'Containerized workloads on Amazon EKS with Helm deployments and ArgoCD GitOps',
-      'Application lifecycle, scaling and rolling updates',
-      'Observability with Prometheus, Grafana and Loki',
-      'Secrets management with External Secrets Operator and Reloader',
-      'Hybrid Kubernetes: EKS on AWS and RKE2 on-premises under a unified model',
+      'EKS on AWS and RKE2 on-premises standardized through ArgoCD GitOps',
+      'Helm-based application lifecycle with rolling updates and rollback',
+      'External Secrets Operator and Reloader for secrets synchronization',
+      'Cluster autoscaler and HPA for workload scaling',
+      'Prometheus, Grafana and Loki observability across both clusters',
     ],
-    stack: ['EKS', 'Kubernetes', 'Helm', 'ArgoCD', 'RKE2'],
+    stack: ['EKS', 'RKE2', 'Kubernetes', 'Helm', 'ArgoCD', 'GitOps', 'External Secrets Operator'],
   },
   {
     id: '03',
     category: 'Migration',
-    title: 'Cloud Migration',
-    subtitle: 'On-Premises → AWS',
-    description:
-      'Structured migration of on-premises workloads to AWS — following a disciplined Assessment → Architecture → Migration → Validation → Production Cutover methodology.',
-    points: [
-      'Assessment of existing workloads and dependencies',
-      'Target architecture design on AWS',
-      'Migration of EC2, RDS, S3 and EKS workloads',
-      'Validation, performance testing and security review',
-      'Production cutover with minimal downtime',
-    ],
-    stack: ['EC2', 'RDS', 'S3', 'EKS', 'Lambda', 'Terraform'],
-  },
-  {
-    id: '04',
-    category: 'Migration',
     title: 'DigitalOcean → AWS Migration',
-    subtitle: '6 Production Applications Migrated',
+    subtitle: '6 Production Applications · End-to-end',
     description:
-      'Modernizing six production applications from DigitalOcean to AWS — redesigning infrastructure, networking, security, deployment and operational practices for an enterprise-grade cloud environment.',
+      'Modernized six production applications from DigitalOcean to AWS — redesigning networking, IAM, storage, CI/CD, monitoring and security with end-to-end cutover planning.',
     points: [
-      'Architecture assessment of 6 production applications',
-      'Network and IAM redesign on AWS (VPC, security groups, IAM roles)',
-      'Storage migration and data integrity validation',
-      'CI/CD modernization with GitHub Actions',
-      'Monitoring, security hardening and production cutover planning',
+      'Architecture assessment of 6 production applications and dependency mapping',
+      'VPC, subnet and security group redesign on AWS',
+      'IAM roles, instance profiles and least-privilege policy design',
+      'CI/CD pipeline migration from manual deploys to GitHub Actions',
+      'Monitoring with Prometheus and Grafana, production cutover with zero data loss',
     ],
     stack: ['AWS', 'DigitalOcean', 'Terraform', 'GitHub Actions', 'Prometheus', 'Grafana'],
     achievement: {
       title: '6 Production Applications Migrated',
-      detail: 'End-to-end migration: architecture assessment, network redesign, IAM redesign, storage migration, CI/CD modernization, monitoring, security hardening and production cutover with minimal downtime.',
+      detail: 'End-to-end: architecture assessment → network redesign → IAM redesign → storage migration → CI/CD modernization → monitoring → security hardening → production cutover with minimal downtime.',
     },
   },
   {
-    id: '05',
+    id: '04',
     category: 'Observability',
     title: 'Cloud Observability Platform',
-    subtitle: 'CloudWatch + Prometheus + Grafana + Loki + ELK',
+    subtitle: 'Prometheus · Grafana · Loki · CloudWatch · ELK',
     description:
-      'Unified observability platform combining metrics, logs, dashboards and alerting — delivering full infrastructure and application visibility and enabling fast production troubleshooting.',
+      'Unified observability platform combining metrics, logs, dashboards and alerting — giving the engineering team full visibility across infrastructure and applications to enable fast incident response.',
     points: [
-      'Metrics collection with CloudWatch and Prometheus',
-      'Log aggregation centralized in Loki and ELK',
-      'Dashboards and actionable alerting in Grafana',
-      'Infrastructure and application observability end-to-end',
-      'Production troubleshooting and SLO tracking',
+      'Metrics collection via Prometheus with CloudWatch for AWS-native services',
+      'Log aggregation with Loki (Kubernetes) and ELK (application logs)',
+      'Grafana dashboards for infrastructure, application and SLO tracking',
+      'Alerting rules and PagerDuty routing for on-call response',
+      'Runbooks and dashboard-to-incident workflow for production troubleshooting',
     ],
-    stack: ['CloudWatch', 'Prometheus', 'Grafana', 'Loki', 'ELK'],
+    stack: ['CloudWatch', 'Prometheus', 'Grafana', 'Loki', 'ELK Stack'],
+  },
+  {
+    id: '05',
+    category: 'DevSecOps',
+    title: 'DevSecOps Engineering Platform',
+    subtitle: 'Trivy · SonarQube · IAM · WAF · GuardDuty',
+    description:
+      'Security integrated into the delivery lifecycle from source to runtime — container scanning, code quality gates, secrets management, edge protection and continuous threat detection.',
+    points: [
+      'Trivy container image scanning and SonarQube code quality gates in CI/CD',
+      'Security validation and policy enforcement in GitHub Actions and GitLab CI/CD',
+      'IAM least-privilege, WAF rules and GuardDuty threat detection',
+      'AWS Secrets Manager — no hardcoded credentials in pipelines or containers',
+      'Runtime monitoring with GuardDuty, Inspector, Security Hub and CloudWatch',
+    ],
+    stack: ['Trivy', 'SonarQube', 'GitHub Actions', 'GitLab CI/CD', 'IAM', 'WAF', 'GuardDuty', 'Secrets Manager', 'Terraform'],
+    flow: ['Source Control', 'CI/CD', 'Code Scan', 'Container Scan', 'Security Validation', 'Deploy', 'Runtime Security', 'Monitoring'],
   },
   {
     id: '06',
     category: 'Security',
-    title: 'Cloud Security Platform',
-    subtitle: 'AWS Defense-in-Depth Security',
+    title: 'AWS Defense-in-Depth Security',
+    subtitle: 'IAM · WAF · GuardDuty · Security Hub · KMS',
     description:
-      'Defense-in-depth AWS security platform integrating identity, network, data and threat-detection controls — with security embedded directly into infrastructure and deployment workflows.',
+      'Multi-layer AWS security platform integrating identity, network, data and threat-detection controls — with security embedded into infrastructure provisioning, not bolted on after deployment.',
     points: [
-      'IAM least privilege, KMS encryption and Secrets Manager',
-      'WAF for edge protection and DDoS mitigation',
-      'GuardDuty, Inspector, Macie and Security Hub for threat detection and compliance',
-      'AWS Config for continuous compliance and drift detection',
-      'Network segmentation with VPC, endpoints and security groups',
+      'IAM least privilege with SCP guardrails at the organization level',
+      'WAF rules for edge protection and DDoS mitigation',
+      'GuardDuty, Inspector, Macie and Security Hub for threat detection and compliance posture',
+      'KMS key management and Secrets Manager for encryption and secrets lifecycle',
+      'AWS Config for continuous compliance drift detection and remediation',
     ],
-    stack: ['IAM', 'WAF', 'GuardDuty', 'Inspector', 'Security Hub', 'KMS', 'Secrets Manager', 'AWS Config'],
+    stack: ['IAM', 'WAF', 'GuardDuty', 'Inspector', 'Security Hub', 'KMS', 'Secrets Manager', 'AWS Config', 'Macie'],
   },
   {
     id: '07',
-    category: 'DevSecOps',
-    title: 'DevSecOps Engineering Platform',
-    subtitle: 'CI/CD + Security Scanning + Cloud Security + Automation',
+    category: 'AI',
+    title: 'RAG & Agentic AI Platform',
+    subtitle: 'Amazon Bedrock · LangChain · LangGraph · MCP · LangSmith',
     description:
-      'Security integrated into the software delivery and infrastructure lifecycle — from source code through build, scan, deployment and runtime, ensuring security is a continuous engineering responsibility rather than a final gate.',
+      'Production AI platform combining a Retrieval-Augmented Generation pipeline for grounded document answers with a multi-agent orchestration layer — exposing infrastructure capabilities to AI agents via MCP servers.',
     points: [
-      'Trivy container image scanning and SonarQube code quality integrated into CI/CD pipelines',
-      'Security validation and policy enforcement embedded in GitHub Actions and GitLab CI/CD',
-      'Infrastructure security with IAM hardening, WAF, GuardDuty and Security Hub',
-      'Secrets management with AWS Secrets Manager — no hardcoded credentials in pipelines',
-      'Runtime security monitoring with GuardDuty, Inspector and CloudWatch',
-      'Vulnerability assessment and remediation workflows across infrastructure and application layers',
+      'RAG pipeline: document ingestion → chunking → embeddings → vector retrieval → grounded LLM response',
+      'Multi-agent orchestration with LangGraph state management and routing',
+      'MCP servers exposing infrastructure and application tools to AI agents',
+      'LLM evaluation, tracing and debugging with LangSmith',
+      'Amazon Bedrock for LLM inference; Streamlit for internal tooling UIs',
     ],
-    stack: ['Trivy', 'SonarQube', 'GitHub Actions', 'GitLab CI/CD', 'IAM', 'WAF', 'GuardDuty', 'Secrets Manager', 'Terraform'],
-    flow: ['Source Control', 'CI/CD Pipeline', 'Code Scan (SonarQube)', 'Container Scan (Trivy)', 'Security Validation', 'Deployment (EKS / Cloud)', 'Runtime Security', 'Monitoring'],
+    stack: ['Amazon Bedrock', 'LangChain', 'LangGraph', 'MCP', 'LangSmith', 'Python', 'Streamlit'],
+    flow: ['Documents', 'Ingestion', 'Embeddings', 'Vector Store', 'Retrieval', 'Context', 'Bedrock LLM', 'Response'],
   },
   {
     id: '08',
-    category: 'AI',
-    title: 'AI / RAG Platform',
-    subtitle: 'Amazon Bedrock + LangChain + LangGraph + Python',
-    description:
-      'Retrieval-Augmented Generation platform turning documents into grounded AI answers — through ingestion, chunking, embeddings, retrieval, context assembly and LLM generation.',
-    points: [
-      'Document ingestion and chunking pipeline',
-      'Embeddings generation and vector retrieval',
-      'Context assembly for grounded, accurate generation',
-      'LLM response with Amazon Bedrock',
-      'Orchestration with LangChain and LangGraph',
-    ],
-    stack: ['Bedrock', 'LangChain', 'LangGraph', 'Python'],
-  },
-  {
-    id: '09',
-    category: 'AI',
-    title: 'Agentic AI / MCP Platform',
-    subtitle: 'LangGraph + Amazon Bedrock + MCP + LangSmith',
-    description:
-      'Multi-agent orchestration platform using LangGraph for state and routing, MCP servers to expose infrastructure and application tools to agents, and LangSmith for tracing, debugging and evaluation.',
-    points: [
-      'Multi-agent orchestration with LangGraph state management and routing',
-      'Tool calling through MCP servers exposing infrastructure capabilities',
-      'Infrastructure and application tool exposure to AI agents',
-      'LLM tracing, debugging and evaluation with LangSmith',
-    ],
-    stack: ['LangGraph', 'Bedrock', 'MCP', 'LangSmith'],
-  },
-  {
-    id: '10',
     category: 'Resilience',
     title: 'Disaster Recovery & Cloud Resilience',
-    subtitle: 'Cloud Infrastructure + Backup/Recovery + Operational Readiness',
+    subtitle: 'Backup/Recovery · DR Planning · Recovery Validation',
     description:
-      'Building infrastructure and operational processes that allow critical workloads and services to be recovered reliably after infrastructure failure or other disruptive events.',
+      'Infrastructure and operational processes enabling critical workloads to be recovered reliably after failure — covering backup strategy, DR architecture, recovery procedures and operational readiness validation.',
     points: [
-      'Disaster recovery planning and recovery architecture for cloud workloads',
-      'Backup and restore strategy design, implementation and validation',
-      'Recovery procedure documentation and operational readiness assessment',
-      'Infrastructure and application recovery processes across AWS environments',
-      'Business continuity support and failure preparedness for production systems',
-      'Recovery validation exercises to confirm recoverability of critical workloads',
+      'DR planning: RPO/RTO requirements, recovery tier classification',
+      'Backup and restore implementation across EC2, RDS, EFS and S3',
+      'Recovery procedure documentation and runbook creation',
+      'Recovery validation exercises to confirm actual recoverability',
+      'Business continuity planning and failure preparedness for production systems',
     ],
-    stack: ['AWS', 'Backup & Restore', 'Disaster Recovery', 'Infrastructure Recovery', 'Business Continuity'],
-    flow: ['Production Environment', 'Backup Mechanisms', 'DR Environment', 'Recovery Validation', 'Operational Readiness'],
-  },
-  {
-    id: '11',
-    category: 'Compliance',
-    title: 'SOC 2 Compliance Automation',
-    subtitle: 'Automation + Security Controls + Drata',
-    description:
-      'SOC 2 compliance requires consistent evidence collection and validation across infrastructure and operational controls. Engineering automation and Drata were used to support compliance workflows and audit readiness.',
-    points: [
-      'Infrastructure security controls aligned with SOC 2 requirements',
-      'Automated scripts for SOC 2 evidence collection and validation',
-      'Automated collection of infrastructure and security configuration evidence',
-      'Compliance workflow integration with Drata for evidence management',
-      'Audit readiness through consistent, repeatable compliance engineering processes',
-    ],
-    stack: ['AWS', 'Drata', 'SOC 2', 'Compliance Automation', 'Security Controls', 'Python'],
-    flow: ['Cloud Infrastructure', 'Security Controls', 'Automated Scripts', 'Evidence Collection', 'Drata', 'SOC 2 Evidence', 'Audit Readiness'],
+    stack: ['AWS Backup', 'S3', 'RDS Snapshots', 'Disaster Recovery', 'Runbooks', 'Infrastructure Recovery'],
+    flow: ['Production', 'Continuous Backup', 'DR Environment', 'Recovery Trigger', 'Validation', 'Operational Readiness'],
   },
 ];
 
@@ -504,132 +413,10 @@ export const projectCategories = [
   'Kubernetes',
   'Migration',
   'Observability',
-  'Security',
   'DevSecOps',
-  'Resilience',
-  'Compliance',
+  'Security',
   'AI',
-];
-
-export const engineeringDomains = [
-  {
-    domain: 'SRE',
-    capabilities: ['Reliability', 'Observability', 'Incident Response', 'Resilience', 'SLOs'],
-  },
-  {
-    domain: 'DevOps',
-    capabilities: ['CI/CD', 'GitOps', 'Automation', 'Release Engineering', 'IaC'],
-  },
-  {
-    domain: 'DevSecOps',
-    capabilities: ['Security Scanning', 'Secure CI/CD', 'IAM', 'Vulnerability Management'],
-  },
-  {
-    domain: 'Cloud',
-    capabilities: ['AWS', 'Azure', 'GCP', 'DigitalOcean', 'Multi-Cloud'],
-  },
-  {
-    domain: 'Platform',
-    capabilities: ['Kubernetes', 'EKS', 'AKS', 'GKE', 'Helm', 'ArgoCD'],
-  },
-  {
-    domain: 'Infrastructure',
-    capabilities: ['Terraform', 'Terragrunt', 'Ansible', 'Linux', 'Networking'],
-  },
-  {
-    domain: 'Security',
-    capabilities: ['IAM', 'WAF', 'GuardDuty', 'Inspector', 'Security Hub', 'KMS'],
-  },
-  {
-    domain: 'DR',
-    capabilities: ['Backup', 'Recovery', 'Resilience', 'Recovery Validation', 'BCP'],
-  },
-  {
-    domain: 'Compliance',
-    capabilities: ['SOC 2', 'Drata', 'Evidence Automation', 'Audit Readiness'],
-  },
-  {
-    domain: 'AI',
-    capabilities: ['RAG', 'Agents', 'Bedrock', 'LangChain', 'LangGraph', 'MCP'],
-  },
-];
-
-export const whatIBring = [
-  {
-    icon: 'ShieldCheck',
-    title: 'Production Engineering',
-    description:
-      'Nine years operating and automating production cloud infrastructure at scale — reliability, observability and incident response are core strengths.',
-  },
-  {
-    icon: 'Globe',
-    title: 'Multi-Cloud',
-    description:
-      'Hands-on experience across AWS, Azure, GCP and DigitalOcean — adapting infrastructure, networking, security and deployment practices to each environment.',
-  },
-  {
-    icon: 'ShieldAlert',
-    title: 'DevSecOps',
-    description:
-      'Security embedded into infrastructure and delivery pipelines from the start — not bolted on at the end. Trivy, SonarQube, IAM, WAF, GuardDuty and Secrets Manager.',
-  },
-  {
-    icon: 'LifeBuoy',
-    title: 'Reliability & Resilience',
-    description:
-      'Full observability stack, SLO tracking, incident response and disaster recovery practices — building systems that stay up and recover quickly when they do not.',
-  },
-  {
-    icon: 'Terminal',
-    title: 'Engineering Automation',
-    description:
-      'Python, Shell and Infrastructure as Code for operational automation, security validation, DR processes and compliance evidence collection.',
-  },
-];
-
-export const development = {
-  quote:
-    'My primary professional experience is in SRE, DevOps, DevSecOps and cloud engineering. Alongside infrastructure and platform engineering, I use development skills to build automation, APIs, integrations and AI-powered applications — including automation that supports operational workflows, security validation, disaster recovery processes and compliance evidence collection.',
-  groups: [
-    {
-      icon: 'Server',
-      title: 'Backend',
-      items: ['Python', 'FastAPI', 'Node.js', 'Go'],
-    },
-    {
-      icon: 'Code2',
-      title: 'Application Development',
-      items: ['JavaScript', 'TypeScript'],
-    },
-    {
-      icon: 'Terminal',
-      title: 'Automation',
-      items: ['Python', 'Shell', 'Go', 'Compliance Scripts', 'DR Automation'],
-    },
-    {
-      icon: 'BrainCircuit',
-      title: 'AI Development',
-      items: ['LangChain', 'LangGraph', 'Amazon Bedrock', 'RAG', 'MCP', 'Streamlit'],
-    },
-  ],
-};
-
-export const aiCards = [
-  {
-    icon: 'FileSearch',
-    title: 'RAG Systems',
-    description: 'Document ingestion → embeddings → retrieval → grounded generation.',
-  },
-  {
-    icon: 'Network',
-    title: 'Agentic Workflows',
-    description: 'State → routing → tools → agents → orchestration.',
-  },
-  {
-    icon: 'ServerCog',
-    title: 'Infrastructure AI',
-    description: 'MCP servers exposing application and infrastructure capabilities to AI agents.',
-  },
+  'Resilience',
 ];
 
 export const securityResilienceCards = [
@@ -656,28 +443,13 @@ export const securityResilienceCards = [
   },
 ];
 
-export const learningFocus = [
-  'Cloud-native architecture',
-  'Site Reliability Engineering',
-  'DevSecOps',
-  'AI engineering',
-  'Agentic AI',
-  'Kubernetes',
-  'Cloud security',
-  'Infrastructure automation',
-  'Disaster recovery',
-  'Compliance engineering',
-];
-
 export const navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Expertise', href: '#expertise' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
+  { label: 'Stack', href: '#stack' },
   { label: 'Security & DR', href: '#security-dr' },
   { label: 'AI', href: '#ai' },
-  { label: 'Engineering', href: '#engineering' },
-  { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ];
 

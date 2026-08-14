@@ -1,65 +1,81 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Github, Linkedin, Mail, Phone } from 'lucide-react';
-import { profile } from '@/data/portfolio';
+import { ArrowUpRight, Download, Eye, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { education, profile } from '@/data/portfolio';
 import { CopyButton } from '@/components/ui/CopyButton';
+import { downloadResume, viewResume } from '@/utils/resume';
 import { Section } from '@/components/ui/Section';
 
 export function Contact() {
+  const hasResume = Boolean(profile.resumeUrl);
   const hasGithub = Boolean(profile.github);
 
   return (
     <Section id="contact" className="border-t border-default">
-      <div className="overflow-hidden rounded-3xl border border-default bg-elev">
-        <div className="grid gap-0 lg:grid-cols-2">
-          {/* Left — message */}
-          <div className="relative p-8 sm:p-12">
-            <div className="pointer-events-none absolute left-0 top-0 h-40 w-40 rounded-full bg-accent-500/10 blur-[80px]" />
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Let's Build Reliable Systems</h2>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
-              Open to opportunities involving SRE, DevOps, cloud infrastructure, platform engineering, automation
-              and AI infrastructure.
-            </p>
+      <div className="overflow-hidden rounded-2xl border border-default bg-elev">
+        <div className="grid lg:grid-cols-2">
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-5 py-2.5 text-sm font-medium text-ink-950 transition-colors hover:bg-accent-400"
-              >
-                <Mail className="h-4 w-4" />
-                Send Email
-              </a>
-              <CopyButton text={profile.email} label="Copy email" />
+          {/* Left — CTA */}
+          <div className="relative p-8 sm:p-10">
+            <div className="pointer-events-none absolute left-0 top-0 h-48 w-48 rounded-full bg-accent-500/8 blur-[80px]" />
+            <div className="relative">
+              <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Let's work together</h2>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
+                Open to senior SRE, DevOps, DevSecOps, Cloud and Platform Engineering roles. Happy to discuss opportunities.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-4 py-2 text-sm font-semibold text-ink-950 transition-all hover:bg-accent-400 active:scale-[0.98]"
+                >
+                  <Mail className="h-4 w-4" />
+                  Send Email
+                </a>
+                <CopyButton text={profile.email} label="Copy email" />
+              </div>
+
+              {/* Resume */}
+              {hasResume && (
+                <div className="mt-6 border-t border-default pt-6">
+                  <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Resume</p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => viewResume(profile.resumeUrl)}
+                      className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                      View
+                    </button>
+                    <button
+                      onClick={() => downloadResume(profile.resumeUrl)}
+                      className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      Download
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Education — compact, below resume */}
+              <div className="mt-6 border-t border-default pt-6">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-muted">Education</p>
+                <p className="mt-1.5 text-sm font-medium">{education.degree} · {education.branch}</p>
+                <p className="text-xs text-muted">{education.institution}</p>
+                <p className="text-xs text-muted">{education.university} · {education.graduation}</p>
+              </div>
             </div>
           </div>
 
-          {/* Right — contact details */}
-          <div className="border-t border-default p-8 sm:p-12 lg:border-l lg:border-t-0">
-            <div className="space-y-3">
-              <ContactRow
-                icon={<Mail className="h-4 w-4" />}
-                label="Email"
-                value={profile.email}
-                href={`mailto:${profile.email}`}
-              />
-              <ContactRow
-                icon={<Phone className="h-4 w-4" />}
-                label="Phone"
-                value={profile.phone}
-                href={`tel:${profile.phone.replace(/\s/g, '')}`}
-              />
-              <ContactRow
-                icon={<Linkedin className="h-4 w-4" />}
-                label="LinkedIn"
-                value="linkedin.com/in/karni-prabhu-aa7a68241"
-                href={profile.linkedin}
-              />
+          {/* Right — contact rows */}
+          <div className="border-t border-default p-8 sm:p-10 lg:border-l lg:border-t-0">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted">Get in touch</p>
+            <div className="space-y-2">
+              <ContactRow icon={<Mail className="h-4 w-4" />} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
+              <ContactRow icon={<Phone className="h-4 w-4" />} label="Phone" value={profile.phone} href={`tel:${profile.phone.replace(/\s/g, '')}`} />
+              <ContactRow icon={<Linkedin className="h-4 w-4" />} label="LinkedIn" value="linkedin.com/in/karni-prabhu-aa7a68241" href={profile.linkedin} />
               {hasGithub && (
-                <ContactRow
-                  icon={<Github className="h-4 w-4" />}
-                  label="GitHub"
-                  value="github.com/prabhu9652"
-                  href={profile.github}
-                />
+                <ContactRow icon={<Github className="h-4 w-4" />} label="GitHub" value="github.com/prabhu9652" href={profile.github} />
               )}
             </div>
           </div>
@@ -69,38 +85,28 @@ export function Contact() {
   );
 }
 
-function ContactRow({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href: string;
-}) {
+function ContactRow({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href: string }) {
   return (
     <motion.a
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      initial={{ opacity: 0, x: 12 }}
+      initial={{ opacity: 0, x: 10 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      className="group flex items-center justify-between gap-3 rounded-xl border border-default bg-[rgb(var(--bg))] p-4 transition-colors hover:border-accent-500/30"
+      transition={{ duration: 0.35 }}
+      className="group flex items-center justify-between gap-3 rounded-lg border border-default bg-[rgb(var(--bg))] p-3.5 transition-all hover:border-accent-500/30 hover:-translate-y-0.5"
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-default bg-elev text-accent-500">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-accent-500">
           {icon}
         </div>
         <div>
-          <div className="text-xs text-muted">{label}</div>
+          <div className="text-[11px] text-muted">{label}</div>
           <div className="text-sm font-medium">{value}</div>
         </div>
       </div>
-      <ArrowUpRight className="h-4 w-4 text-muted transition-colors group-hover:text-accent-500" />
+      <ArrowUpRight className="h-3.5 w-3.5 text-muted/40 transition-colors group-hover:text-accent-500" aria-hidden="true" />
     </motion.a>
   );
 }
