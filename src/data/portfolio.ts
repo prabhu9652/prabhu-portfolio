@@ -198,15 +198,16 @@ export const techStack: { category: string; items: string[] }[] = [
 
 export const experience = [
   {
-    company: 'VinylEquity',
+    company: 'Techverito',
     role: 'SRE',
-    period: 'Jan 2023 – Jul 2026',
+    client: 'VinylEquity',
+    period: 'Jul 2022 – Jul 2026',
     summary:
-      'Most recent and most senior engagement — owning AWS multi-account platform architecture, EKS-based Kubernetes delivery, DevSecOps, observability, security and compliance automation, while introducing AI/RAG capabilities.',
+      'SRE engagement through Techverito on the VinylEquity client project — owning AWS multi-account platform architecture, EKS-based Kubernetes delivery, hybrid Kubernetes (RKE2 on-premises), DevSecOps, observability, security, compliance automation and AI/RAG capabilities.',
     highlights: [
       'Architected AWS multi-account infrastructure with Terraform and Terragrunt, standardizing environments through reusable modules and automated deployment pipelines.',
-      'Operated production Kubernetes on EKS with Helm and ArgoCD GitOps, managing application lifecycle, scaling and secrets synchronization via External Secrets Operator and Reloader.',
-      'Built observability stack across CloudWatch, Prometheus, Grafana, Loki and ELK for full metrics, log and alerting coverage.',
+      'Operated production Kubernetes on EKS and RKE2 (on-premises) with Helm and ArgoCD GitOps, managing application lifecycle, scaling and secrets synchronization via External Secrets Operator and Reloader.',
+      'Built unified observability stack across CloudWatch, Prometheus, Grafana, Loki and ELK for full metrics, log and alerting coverage across both environments.',
       'Implemented DevSecOps controls including Trivy container scanning, SonarQube code quality and security validation integrated into CI/CD pipelines.',
       'Implemented AWS security controls including WAF, Secrets Manager, IAM hardening, GuardDuty and network segmentation with VPC endpoints.',
       'Supported SOC 2 compliance activities through infrastructure security controls, evidence collection and compliance automation using Drata.',
@@ -216,33 +217,12 @@ export const experience = [
       'Engineered AI application features using RAG, LangChain, LangGraph, Amazon Bedrock, MCP and LangSmith.',
     ],
     stack: [
-      'AWS', 'Terraform', 'Terragrunt', 'EKS', 'Kubernetes', 'Helm', 'ArgoCD',
+      'AWS', 'Terraform', 'Terragrunt', 'EKS', 'Kubernetes', 'RKE2', 'Helm', 'ArgoCD',
       'GitHub Actions', 'GitLab CI/CD', 'Trivy', 'SonarQube',
       'CloudWatch', 'Prometheus', 'Grafana', 'Loki', 'ELK',
       'Lambda', 'API Gateway', 'S3', 'CloudFront', 'Route 53',
       'WAF', 'GuardDuty', 'Secrets Manager', 'Aurora PostgreSQL', 'Aurora MySQL', 'Redis',
       'Drata', 'SOC 2', 'Disaster Recovery', 'Bedrock', 'LangChain', 'LangGraph', 'MCP', 'LangSmith',
-    ],
-  },
-  {
-    company: 'Techverito',
-    role: 'SRE',
-    period: 'Jul 2022 – Jul 2026',
-    summary:
-      'SRE / platform engineering across hybrid environments — combining on-premises Kubernetes (RKE2) with AWS cloud (EKS) under a unified GitOps, DevSecOps and observability model.',
-    highlights: [
-      'Operated hybrid Kubernetes across RKE2 on-premises and EKS on AWS, standardized through ArgoCD GitOps and Helm.',
-      'Built AWS infrastructure automation with Terraform and Terragrunt, driven by GitLab CI/CD pipelines.',
-      'Integrated Trivy image scanning and security validation into the delivery pipeline for DevSecOps compliance.',
-      'Deployed observability with Prometheus, Grafana, Loki and CloudWatch across both environments.',
-      'Hardened AWS security with Secrets Manager and External Secrets Operator for secrets synchronization.',
-      'Built Python automation for operational toil reduction and supported AI workloads including RAG.',
-    ],
-    stack: [
-      'AWS', 'Terraform', 'Terragrunt', 'GitLab CI/CD', 'Trivy',
-      'RKE2', 'EKS', 'Kubernetes', 'ArgoCD', 'Helm', 'GitOps',
-      'Prometheus', 'Grafana', 'Loki', 'CloudWatch',
-      'Secrets Manager', 'External Secrets Operator', 'Python', 'RAG',
     ],
   },
   {
@@ -694,8 +674,17 @@ export const navLinks = [
   { label: 'Expertise', href: '#expertise' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Security & DR', href: '#security-resilience' },
+  { label: 'Security & DR', href: '#security-dr' },
   { label: 'AI', href: '#ai' },
   { label: 'Engineering', href: '#engineering' },
+  { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ];
+
+export const education = {
+  institution: 'Kakinada Institute of Engineering and Technology-II',
+  university: 'Jawaharlal Nehru Technological University, Kakinada (JNTU-K)',
+  degree: 'Bachelor of Technology (B.Tech)',
+  branch: 'Mechanical Engineering',
+  graduation: 'June 2017',
+};

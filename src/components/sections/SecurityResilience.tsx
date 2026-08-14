@@ -36,11 +36,11 @@ const devSecOpsFlow = [
 
 export function SecurityResilience() {
   return (
-    <Section id="security-resilience" className="border-t border-default">
+    <Section id="security-dr" className="border-t border-default">
       <SectionHeader
-        eyebrow="DevSecOps · Security · Resilience · Compliance"
-        title="Security, recovery and compliance as engineering disciplines"
-        description="DevSecOps, disaster recovery and SOC 2 compliance automation are part of production SRE responsibilities — not separate functions. Security is integrated into CI/CD, infrastructure and runtime. Recovery and compliance are engineered, not improvised."
+        eyebrow="Security & DR"
+        title="Security engineering and disaster recovery"
+        description="Building secure and resilient cloud environments through infrastructure security, security automation, disaster recovery planning, backup and recovery practices, and operational readiness."
       />
 
       {/* Three capability cards */}

@@ -15,6 +15,7 @@ import { WhatIBring } from '@/components/sections/WhatIBring';
 import { ContinuousLearning } from '@/components/sections/ContinuousLearning';
 import { GitHubSection } from '@/components/sections/GitHubSection';
 import { Resume } from '@/components/sections/Resume';
+import { Education } from '@/components/sections/Education';
 import { Contact } from '@/components/sections/Contact';
 import { useTheme } from '@/hooks/useTheme';
 
@@ -40,6 +41,7 @@ function App() {
         <ContinuousLearning />
         <GitHubSection />
         <Resume />
+        <Education />
         <Contact />
       </main>
       <Footer />
