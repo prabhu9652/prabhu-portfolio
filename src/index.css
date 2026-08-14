@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 250 250 252;
+    --bg-elev: 255 255 255;
+    --border: 229 231 235;
+    --text: 17 24 39;
+    --text-muted: 107 114 128;
+  }
+
+  .dark {
+    --bg: 8 10 12;
+    --bg-elev: 19 22 26;
+    --border: 38 42 48;
+    --text: 237 240 243;
+    --text-muted: 148 156 170;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background-color: rgb(34 211 238 / 0.25);
+  color: rgb(var(--text));
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--border));
+    border-radius: 9999px;
+    border: 2px solid rgb(var(--bg));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--text-muted));
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .container-max {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .text-muted {
+    color: rgb(var(--text-muted));
+  }
+
+  .bg-elev {
+    background-color: rgb(var(--bg-elev));
+  }
+
+  .border-default {
+    border-color: rgb(var(--border));
+  }
+
+  .glass-card {
+    background-color: rgb(var(--bg-elev) / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(var(--border) / 0.8);
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgb(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .dot-pattern {
+    background-image: radial-gradient(rgb(var(--border)) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-default px-3 py-1 text-xs font-medium text-muted transition-colors hover:text-[rgb(var(--text))] hover:border-accent-500/40;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
