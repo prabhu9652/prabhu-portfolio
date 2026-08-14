@@ -1,11 +1,10 @@
-version: "3.9"
-
+# Docker Compose v2+ — no 'version' field required
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: vite-react-app
+    container_name: portfolio
     ports:
       - "8080:80"
     restart: unless-stopped

@@ -1,22 +1,43 @@
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Award, ChevronDown } from 'lucide-react';
 import { experience } from '@/data/portfolio';
 import { Section, SectionHeader } from '@/components/ui/Section';
+import {
+  accordionBody,
+  staggerContainer,
+  staggerChild,
+  reducedVariants,
+} from '@/lib/motion';
 
 export function Experience() {
-  // First entry open by default so content is immediately visible
   const [openIdx, setOpenIdx] = useState(0);
+  const prefersReduced = useReducedMotion() ?? false;
+
+  const listV  = reducedVariants(staggerContainer(0.07, 0.05), prefersReduced);
+  const cardV  = reducedVariants(staggerChild, prefersReduced);
+  const bodyV  = prefersReduced
+    ? {
+        collapsed: { opacity: 0, height: 0, transition: { duration: 0.15 } },
+        expanded:  { opacity: 1, height: 'auto', transition: { duration: 0.15 } },
+      }
+    : accordionBody;
 
   return (
     <Section id="experience" className="border-t border-default">
       <SectionHeader
-        eyebrow="Techverito · Social Alpha · IDSL"
+        eyebrow="Techverito · Social Alpha · IDSL · 2017 – present"
         title="Nine years of production engineering"
-        description="From Linux and automation foundations at IDSL through DevOps at Social Alpha to senior SRE work at Techverito — progressing in scope, depth and responsibility at each stage."
+        description="Four years as Senior SRE owning AWS platforms end-to-end, preceded by DevOps engineering across multi-cloud migrations and infrastructure automation from 2017."
       />
 
-      <div className="mt-12 space-y-2">
+      <motion.div
+        variants={listV}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-60px' }}
+        className="mt-10 space-y-2"
+      >
         {experience.map((job, i) => {
           const open = openIdx === i;
           const monogram = job.company.slice(0, 2).toUpperCase();
@@ -24,22 +45,22 @@ export function Experience() {
           return (
             <motion.div
               key={job.company + job.period}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`overflow-hidden rounded-xl border bg-elev transition-colors ${
+              variants={cardV}
+              className={`overflow-hidden rounded-xl border bg-elev transition-[border-color] duration-200 ${
                 open ? 'border-accent-500/40' : 'border-default hover:border-accent-500/20'
               }`}
             >
-              {/* Header */}
+              {/* Accordion header */}
               <button
                 onClick={() => setOpenIdx(open ? -1 : i)}
                 aria-expanded={open}
                 className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-500"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-default bg-[rgb(var(--bg))] font-mono text-sm font-semibold text-accent-500">
+                  {/* Monogram — accent ring on open */}
+                  <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border bg-[rgb(var(--bg))] font-mono text-sm font-semibold text-accent-500 transition-[border-color] duration-200 ${
+                    open ? 'border-accent-500/30' : 'border-default'
+                  }`}>
                     {monogram}
                   </div>
                   <div>
@@ -57,29 +78,34 @@ export function Experience() {
                     </div>
                   </div>
                 </div>
+
+                {/* Chevron rotates via CSS — no Framer needed for a single property */}
                 <ChevronDown
                   className={`h-4 w-4 shrink-0 text-muted transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                 />
               </button>
 
-              {/* Body */}
+              {/* Accordion body — sequenced height → opacity on open, opacity → height on close */}
               <AnimatePresence initial={false}>
                 {open && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                    key={`body-${job.company}`}
+                    variants={bodyV}
+                    initial="collapsed"
+                    animate="expanded"
+                    exit="collapsed"
                     className="overflow-hidden"
                   >
                     <div className="border-t border-default px-5 pb-6 pt-5 sm:px-6">
                       <p className="text-sm leading-relaxed text-muted">{job.summary}</p>
 
-                      {/* Career progression (IDSL) */}
+                      {/* Career progression (IDSL only) */}
                       {'progression' in job && Array.isArray(job.progression) && (
                         <div className="mt-5">
-                          <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted">Progression</p>
+                          <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted">
+                            Progression
+                          </p>
                           <div className="flex flex-wrap items-center gap-1.5">
                             {job.progression.map((step: string, si: number) => (
                               <div key={step} className="flex items-center gap-1.5">
@@ -87,7 +113,7 @@ export function Experience() {
                                   {step}
                                 </span>
                                 {si < (job.progression as string[]).length - 1 && (
-                                  <span className="text-accent-500/50 text-xs" aria-hidden="true">→</span>
+                                  <span className="text-xs text-accent-500/50" aria-hidden="true">→</span>
                                 )}
                               </div>
                             ))}
@@ -99,13 +125,13 @@ export function Experience() {
                       <ul className="mt-5 space-y-2" aria-label="Key responsibilities">
                         {job.highlights.map((h) => (
                           <li key={h} className="flex gap-3 text-sm leading-relaxed text-muted">
-                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-500/70" aria-hidden="true" />
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent-500/60" aria-hidden="true" />
                             {h}
                           </li>
                         ))}
                       </ul>
 
-                      {/* Achievement */}
+                      {/* Achievement callout */}
                       {'achievement' in job && job.achievement && (
                         <div className="mt-5 flex gap-3 rounded-lg border border-accent-500/20 bg-accent-500/5 p-4">
                           <Award className="mt-0.5 h-4 w-4 shrink-0 text-accent-500" aria-hidden="true" />
@@ -116,7 +142,7 @@ export function Experience() {
                         </div>
                       )}
 
-                      {/* Stack */}
+                      {/* Stack tags */}
                       <div className="mt-5 flex flex-wrap gap-1.5" aria-label="Technologies">
                         {job.stack.map((s) => (
                           <span key={s} className="tag">{s}</span>
@@ -129,7 +155,7 @@ export function Experience() {
             </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </Section>
   );
 }

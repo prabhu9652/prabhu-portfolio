@@ -1,51 +1,31 @@
 import {
   Activity,
   BrainCircuit,
-  Boxes,
   ClipboardCheck,
-  Cloud,
-  Code2,
-  FileSearch,
   GitMerge,
   Globe,
   LifeBuoy,
-  Lock,
-  Network,
-  RefreshCw,
-  Server,
-  ServerCog,
   ShieldAlert,
   ShieldCheck,
-  Terminal,
-  TrendingUp,
   Workflow,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-const map: Record<string, LucideIcon> = {
+// Maps string icon names (used in portfolio.ts data) to Lucide components.
+// Activity is the fallback for any unrecognised name.
+const iconMap: Record<string, LucideIcon> = {
   Activity,
   BrainCircuit,
-  Boxes,
   ClipboardCheck,
-  Cloud,
-  Code2,
-  FileSearch,
   GitMerge,
   Globe,
   LifeBuoy,
-  Lock,
-  Network,
-  RefreshCw,
-  Server,
-  ServerCog,
   ShieldAlert,
   ShieldCheck,
-  Terminal,
-  TrendingUp,
   Workflow,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {
-  const Cmp = map[name] ?? Activity;
+  const Cmp = iconMap[name] ?? Activity;
   return <Cmp className={className} />;
 }

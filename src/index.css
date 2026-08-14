@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -76,26 +74,8 @@
     border-color: rgb(var(--border));
   }
 
-  .glass-card {
-    background-color: rgb(var(--bg-elev) / 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgb(var(--border) / 0.8);
-  }
-
-  .grid-pattern {
-    background-image:
-      linear-gradient(rgb(var(--border) / 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(var(--border) / 0.4) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  .dot-pattern {
-    background-image: radial-gradient(rgb(var(--border)) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
-
   .tag {
-    @apply inline-flex items-center gap-1.5 rounded-md border border-default px-2.5 py-1 text-xs font-medium text-muted transition-colors hover:text-[rgb(var(--text))] hover:border-accent-500/40;
+    @apply inline-flex items-center gap-1.5 rounded-md border border-default px-2.5 py-1 text-xs font-medium text-muted transition-[color,border-color] hover:text-[rgb(var(--text))] hover:border-accent-500/40;
   }
 }
 
@@ -107,5 +87,22 @@
   .mask-fade-b {
     -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * prefers-reduced-motion
+ * When the user has requested reduced motion, disable all CSS animations
+ * and transitions that involve transform or filter. Framer Motion variants
+ * also check this via the useReducedMotion() hook used in each component.
+ * --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

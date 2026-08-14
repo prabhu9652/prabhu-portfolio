@@ -1,10 +1,9 @@
 export const profile = {
   name: 'Prabhu Karni',
-  role: 'Senior SRE • DevOps • DevSecOps • Cloud & Platform Engineer',
+  role: 'Senior Site Reliability Engineer',
+  roleContext: 'DevOps · DevSecOps · Cloud & Platform Engineering',
   tagline:
-    'Designing, automating, securing and operating reliable cloud platforms across AWS, Azure, GCP and DigitalOcean.',
-  description:
-    '9+ years of experience across cloud infrastructure, Kubernetes, Infrastructure as Code, CI/CD, DevSecOps, observability, disaster recovery, SOC 2 compliance automation and AI-powered applications.',
+    'Building reliable, secure and scalable production infrastructure — across AWS, Azure, GCP and DigitalOcean, with Kubernetes, Terraform and Python as the core toolkit.',
   email: 'karniprabhu0@gmail.com',
   phone: '+91 7013424340',
   linkedin: 'https://www.linkedin.com/in/karni-prabhu-aa7a68241',
@@ -13,11 +12,11 @@ export const profile = {
 };
 
 export const heroStats = [
-  { label: 'Years Experience', value: '9+' },
+  { label: 'Experience', value: '9+' },
   { label: 'Cloud', value: 'AWS · Azure · GCP' },
   { label: 'Kubernetes', value: 'EKS · AKS · GKE · RKE2' },
-  { label: 'IaC', value: 'Terraform · Terragrunt' },
-  { label: 'Focus', value: 'SRE · DevOps · DevSecOps' },
+  { label: 'CI/CD', value: 'GitHub Actions · GitLab · Jenkins' },
+  { label: 'Observability', value: 'Prometheus · Grafana · Loki' },
 ];
 
 export const capabilities = [
@@ -25,89 +24,43 @@ export const capabilities = [
     icon: 'ShieldCheck',
     title: 'Site Reliability Engineering',
     description:
-      'Designing and operating reliable production systems with strong focus on availability, scalability, observability, incident response and continuous improvement.',
+      'Availability, scalability, incident response, SLO tracking and continuous improvement across production systems. On-call ownership, runbooks and post-mortem culture.',
   },
   {
     icon: 'Globe',
     title: 'Cloud & Platform Engineering',
     description:
-      'Designing and automating cloud infrastructure across AWS, Azure, GCP and DigitalOcean using Kubernetes, Infrastructure as Code, Elastic Beanstalk and cloud-native services.',
+      'Multi-cloud infrastructure across AWS, Azure, GCP and DigitalOcean — compute, networking, storage, serverless and managed services designed for production from day one.',
   },
   {
     icon: 'GitMerge',
-    title: 'DevOps & CI/CD',
+    title: 'Kubernetes & Container Platforms',
     description:
-      'Building CI/CD pipelines, GitOps workflows, deployment automation and release engineering with GitHub Actions, GitLab CI/CD and Jenkins across multi-cloud environments.',
+      'EKS, AKS, GKE and RKE2 in production. Helm, ArgoCD GitOps, HPA, External Secrets Operator and hybrid cloud/on-premises Kubernetes delivery.',
+  },
+  {
+    icon: 'Workflow',
+    title: 'CI/CD & Infrastructure as Code',
+    description:
+      'GitHub Actions, GitLab CI/CD and Jenkins pipelines. Terraform and Terragrunt for multi-account IaC. GitOps delivery with ArgoCD across cloud and on-premises environments.',
+  },
+  {
+    icon: 'Activity',
+    title: 'Observability & Reliability',
+    description:
+      'Full-stack observability with Prometheus, Grafana, Loki, CloudWatch and ELK. SLO dashboards, alerting rules, on-call routing and runbook-backed incident response.',
   },
   {
     icon: 'ShieldAlert',
     title: 'DevSecOps & Cloud Security',
     description:
-      'Integrating security into the software delivery and infrastructure lifecycle — through vulnerability scanning, secure CI/CD, IAM hardening, WAF, GuardDuty and continuous security controls.',
-  },
-  {
-    icon: 'LifeBuoy',
-    title: 'Disaster Recovery & Resilience',
-    description:
-      'Designing backup and recovery strategies, DR architecture, recovery validation and operational readiness to ensure production systems remain recoverable.',
-  },
-  {
-    icon: 'ClipboardCheck',
-    title: 'Compliance Automation',
-    description:
-      'Supporting SOC 2 compliance through infrastructure security controls, automated evidence collection, Drata workflows and engineering-driven compliance activities.',
+      'Security embedded in CI/CD — Trivy, SonarQube, IAM least-privilege, WAF, GuardDuty, Security Hub and Secrets Manager. Shift-left security from commit to runtime.',
   },
   {
     icon: 'BrainCircuit',
-    title: 'AI & Application Engineering',
+    title: 'AI & GenAI Infrastructure',
     description:
-      'Building AI applications, RAG pipelines, agentic workflows and infrastructure integrations using Python, Amazon Bedrock, LangChain, LangGraph and MCP.',
-  },
-];
-
-export const philosophy = [
-  {
-    icon: 'ShieldCheck',
-    title: 'Reliability First',
-    description: 'Build systems that remain dependable under failure, scale and change.',
-  },
-  {
-    icon: 'Workflow',
-    title: 'Automate Everything Repeatable',
-    description: 'Replace manual operational work with Infrastructure as Code, CI/CD and automation.',
-  },
-  {
-    icon: 'Lock',
-    title: 'Security by Design',
-    description:
-      'Integrate least privilege, secrets management, encryption, network security and continuous security monitoring from the start.',
-  },
-  {
-    icon: 'Activity',
-    title: 'Observable by Default',
-    description: 'Build systems with meaningful metrics, logs, dashboards and actionable alerts from day one.',
-  },
-  {
-    icon: 'Boxes',
-    title: 'Infrastructure as Code',
-    description: 'Use Terraform and Terragrunt to create consistent, version-controlled and repeatable infrastructure.',
-  },
-  {
-    icon: 'TrendingUp',
-    title: 'Continuous Improvement',
-    description: 'Use incidents, metrics and operational experience to continuously improve platforms and processes.',
-  },
-  {
-    icon: 'LifeBuoy',
-    title: 'Resilience Beyond Availability',
-    description:
-      'Design systems not only to remain available during normal failures, but also to be recoverable when larger disruptions occur.',
-  },
-  {
-    icon: 'ClipboardCheck',
-    title: 'Compliance Through Engineering',
-    description:
-      'Automate security and compliance controls wherever possible instead of relying entirely on manual processes.',
+      'RAG pipelines, agentic workflows and MCP servers built on Amazon Bedrock, LangChain, LangGraph and LangSmith — applying production engineering rigour to AI workloads.',
   },
 ];
 
@@ -137,7 +90,7 @@ export const techStack: { category: string; items: string[] }[] = [
   },
   {
     category: 'CI/CD & GitOps',
-    items: ['GitHub Actions', 'GitLab CI/CD', 'Jenkins', 'Bamboo', 'ArgoCD'],
+    items: ['GitHub Actions', 'GitLab CI/CD', 'Jenkins', 'Bamboo'],
   },
   {
     category: 'Observability',
@@ -162,14 +115,12 @@ export const techStack: { category: string; items: string[] }[] = [
     ],
   },
   {
-    category: 'Resilience, Compliance & DR',
+    category: 'Resilience & DR',
     items: [
       'Drata',
       'SOC 2',
-      'Compliance Automation',
       'Disaster Recovery',
       'Backup & Restore',
-      'Business Continuity',
     ],
   },
   {
@@ -199,22 +150,21 @@ export const techStack: { category: string; items: string[] }[] = [
 export const experience = [
   {
     company: 'Techverito',
-    role: 'SRE',
+    role: 'Senior SRE',
     client: 'VinylEquity',
     period: 'Jul 2022 – Jul 2026',
     summary:
-      'SRE engagement through Techverito on the VinylEquity client project — owning AWS multi-account platform architecture, EKS-based Kubernetes delivery, hybrid Kubernetes (RKE2 on-premises), DevSecOps, observability, security, compliance automation and AI/RAG capabilities.',
+      'Four-year embedded SRE engagement — owning the full AWS platform from infrastructure through Kubernetes delivery, observability, security and AI/RAG capabilities for the VinylEquity product.',
     highlights: [
       'Architected AWS multi-account infrastructure with Terraform and Terragrunt, standardizing environments through reusable modules and automated deployment pipelines.',
       'Operated production Kubernetes on EKS and RKE2 (on-premises) with Helm and ArgoCD GitOps, managing application lifecycle, scaling and secrets synchronization via External Secrets Operator and Reloader.',
-      'Built unified observability stack across CloudWatch, Prometheus, Grafana, Loki and ELK for full metrics, log and alerting coverage across both environments.',
-      'Implemented DevSecOps controls including Trivy container scanning, SonarQube code quality and security validation integrated into CI/CD pipelines.',
-      'Implemented AWS security controls including WAF, Secrets Manager, IAM hardening, GuardDuty and network segmentation with VPC endpoints.',
-      'Supported SOC 2 compliance activities through infrastructure security controls, evidence collection and compliance automation using Drata.',
-      'Developed scripts and automation to streamline SOC 2 evidence collection and validation, improving consistency of compliance evidence.',
-      'Designed and supported disaster recovery strategies — including backup/restore processes, recovery procedures and operational readiness validation.',
-      'Delivered serverless building blocks with Lambda, API Gateway, S3, CloudFront and Route 53 for edge and API workloads.',
-      'Engineered AI application features using RAG, LangChain, LangGraph, Amazon Bedrock, MCP and LangSmith.',
+      'Built unified observability stack across CloudWatch, Prometheus, Grafana, Loki and ELK — full metrics, log and alerting coverage across cloud and on-premises environments.',
+      'Implemented DevSecOps controls: Trivy container scanning, SonarQube code quality and security validation integrated into CI/CD pipelines.',
+      'Implemented AWS security controls: WAF, Secrets Manager, IAM hardening, GuardDuty and network segmentation with VPC endpoints.',
+      'Supported SOC 2 compliance through infrastructure security controls, evidence collection and compliance automation using Drata.',
+      'Designed and supported disaster recovery — backup/restore processes, recovery procedures and operational readiness validation.',
+      'Delivered serverless stack: Lambda, API Gateway, S3, CloudFront and Route 53 for edge and API workloads.',
+      'Engineered production AI features using RAG, LangChain, LangGraph, Amazon Bedrock, MCP and LangSmith.',
     ],
     stack: [
       'AWS', 'Terraform', 'Terragrunt', 'EKS', 'Kubernetes', 'RKE2', 'Helm', 'ArgoCD',
@@ -230,19 +180,19 @@ export const experience = [
     role: 'DevOps Engineer',
     period: 'Feb 2021 – Jul 2022',
     summary:
-      'Multi-cloud DevOps engineering across AWS, GCP and DigitalOcean — with a landmark migration of six production applications from DigitalOcean to AWS.',
+      'Multi-cloud DevOps engineering across AWS, GCP and DigitalOcean — including a complete migration of six production applications from DigitalOcean to AWS.',
     highlights: [
       'Designed multi-cloud architecture across AWS, GCP and DigitalOcean using Terraform.',
-      'Built CI/CD pipelines with Jenkins and GitHub Actions, implementing blue-green and zero-downtime deployments.',
-      'Implemented DevSecOps practices with continuous security scanning, vulnerability assessment and policy enforcement.',
-      'Operated observability with Grafana, Prometheus and Loki across cloud environments.',
-      'Led migration of 6 production applications from DigitalOcean to AWS — redesigning networking, IAM, storage, CI/CD, monitoring and security with end-to-end cutover planning.',
+      'Built CI/CD pipelines with Jenkins and GitHub Actions — blue-green and zero-downtime deployments.',
+      'Implemented DevSecOps practices: continuous security scanning, vulnerability assessment and policy enforcement.',
+      'Operated observability with Grafana, Prometheus and Loki across all cloud environments.',
+      'Led migration of 6 production applications from DigitalOcean to AWS — networking, IAM, storage, CI/CD, monitoring and security redesigned end-to-end.',
     ],
     stack: ['AWS', 'GCP', 'DigitalOcean', 'Terraform', 'Jenkins', 'GitHub Actions', 'Grafana', 'Prometheus', 'Loki'],
     achievement: {
       title: '6 Production Applications Migrated: DigitalOcean → AWS',
       detail:
-        'End-to-end migration covering architecture assessment, network redesign, IAM redesign, storage migration, CI/CD modernization, monitoring, security hardening and production cutover with minimal downtime.',
+        'End-to-end migration: architecture assessment, network redesign, IAM redesign, storage migration, CI/CD modernization, monitoring, security hardening and production cutover with minimal downtime.',
     },
   },
   {
@@ -250,14 +200,14 @@ export const experience = [
     role: 'DevOps Engineer',
     period: 'May 2017 – Dec 2020',
     summary:
-      'The foundation of the career — progressing from Software Engineer through Linux Administrator and Automation Engineer to DevOps Engineer, building deep Linux, automation and multi-cloud fundamentals.',
+      'Built the technical foundations — progressing through four roles over three years while developing deep Linux, networking, automation and multi-cloud infrastructure skills.',
     highlights: [
-      'Progressed through Software Engineer → Linux Administrator → Automation Engineer → DevOps Engineer.',
-      'Built Linux and shell scripting foundations, including backup, recovery and operational automation.',
-      'Delivered AWS infrastructure with EC2, S3, ELB, Auto Scaling, Elastic Beanstalk and Terraform.',
-      'Deployed and managed application workloads on Elastic Beanstalk — environment configuration, application deployment, infrastructure integration and operational management.',
-      'Designed networking with VPC and VPC Peering across environments.',
-      'Built CI/CD with Jenkins and Ansible, containerized workloads with Docker.',
+      'Progressed: Software Engineer → Linux Administrator → Automation Engineer → DevOps Engineer.',
+      'Built Linux and shell scripting foundations including backup, recovery and operational automation.',
+      'Delivered AWS infrastructure: EC2, S3, ELB, Auto Scaling, Elastic Beanstalk and Terraform.',
+      'Deployed and managed application workloads on Elastic Beanstalk — environment configuration, deployment pipelines and operational management.',
+      'Designed VPC networking with VPC Peering across environments.',
+      'Built CI/CD with Jenkins and Ansible; containerized workloads with Docker.',
       'Expanded to Azure (AKS) and GCP (GKE) for multi-cloud Kubernetes delivery.',
     ],
     stack: [

@@ -1,7 +1,15 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { securityResilienceCards } from '@/data/portfolio';
 import { Icon } from '@/components/ui/Icon';
 import { Section, SectionHeader } from '@/components/ui/Section';
+import {
+  staggerContainer,
+  staggerChild,
+  fadeUp,
+  pipelineContainer,
+  pipelineStep,
+  reducedVariants,
+} from '@/lib/motion';
 
 const securityTools = [
   'AWS IAM', 'AWS WAF', 'GuardDuty', 'Inspector',
@@ -19,81 +27,110 @@ const drFlow = [
 ];
 
 export function SecurityResilience() {
+  const prefersReduced = useReducedMotion() ?? false;
+
+  const cardsV   = reducedVariants(staggerContainer(0.09, 0.05), prefersReduced);
+  const cardV    = reducedVariants(staggerChild, prefersReduced);
+  const panelV   = reducedVariants(fadeUp(0, 10), prefersReduced);
+  const pipeV    = reducedVariants(pipelineContainer, prefersReduced);
+  const stepV    = reducedVariants(pipelineStep, prefersReduced);
+
   return (
     <Section id="security-dr" className="border-t border-default">
       <SectionHeader
-        eyebrow="IAM · WAF · GuardDuty · DR · SOC 2"
-        title="Security engineering and disaster recovery"
+        eyebrow="Security engineering & disaster recovery"
+        title="Security, resilience and compliance"
         description="Security is embedded into the delivery lifecycle, not bolted on at the end. Disaster recovery is planned, tested and validated — not improvised during an incident."
       />
 
-      {/* Three high-level capability cards */}
-      <div className="mt-12 grid gap-3 md:grid-cols-3">
-        {securityResilienceCards.map((card, i) => (
+      {/* Capability cards — staggered */}
+      <motion.div
+        variants={cardsV}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: '-60px' }}
+        className="mt-12 grid gap-3 md:grid-cols-3"
+      >
+        {securityResilienceCards.map((card) => (
           <motion.div
             key={card.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.45, delay: i * 0.1 }}
-            className="group relative overflow-hidden rounded-xl border border-default bg-elev p-5 transition-all hover:border-accent-500/40 hover:-translate-y-0.5"
+            variants={cardV}
+            className="group relative overflow-hidden rounded-xl border border-default bg-elev p-5 transition-[border-color,transform] duration-200 hover:border-accent-500/40 hover:-translate-y-px"
           >
-            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-accent-500/5 blur-2xl opacity-0 transition-opacity group-hover:opacity-100" />
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-default bg-[rgb(var(--bg))] text-accent-500">
+            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-accent-500/5 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-default bg-[rgb(var(--bg))] text-accent-500">
               <Icon name={card.icon} className="h-4 w-4" />
             </div>
-            <h3 className="mt-3.5 text-sm font-semibold">{card.title}</h3>
-            <p className="mt-1.5 text-xs leading-relaxed text-muted">{card.description}</p>
-            <div className="mt-3 flex flex-wrap gap-1">
+            <h3 className="relative mt-3.5 text-sm font-semibold">{card.title}</h3>
+            <p className="relative mt-1.5 text-xs leading-relaxed text-muted">{card.description}</p>
+            <div className="relative mt-3 flex flex-wrap gap-1">
               {card.tags.map((tag) => (
-                <span key={tag} className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] text-muted">
+                <span
+                  key={tag}
+                  className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] text-muted"
+                >
                   {tag}
                 </span>
               ))}
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Two-column split: Security tools list + DR flow */}
+      {/* Two-column detail panels */}
       <div className="mt-5 grid gap-4 md:grid-cols-2">
-        {/* Security tooling */}
+        {/* Security tooling — fades up */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={panelV}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.45 }}
           className="rounded-xl border border-default bg-elev p-5"
         >
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Security Engineering</p>
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">
+            Security Engineering
+          </p>
           <div className="flex flex-wrap gap-1.5">
             {securityTools.map((t) => (
-              <span key={t} className="rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default">
+              <span
+                key={t}
+                className="cursor-default rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))]"
+              >
                 {t}
               </span>
             ))}
           </div>
         </motion.div>
 
-        {/* DR lifecycle */}
+        {/* DR lifecycle — steps stagger in sequentially */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={panelV}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.45, delay: 0.06 }}
           className="rounded-xl border border-default bg-elev p-5"
         >
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Disaster Recovery Lifecycle</p>
-          <div className="flex flex-col gap-1.5">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">
+            Disaster Recovery Lifecycle
+          </p>
+          <motion.div
+            variants={pipeV}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+            className="flex flex-col gap-1.5"
+          >
             {drFlow.map((step, i, arr) => (
-              <div key={step} className="flex items-center gap-1.5">
-                <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-3 py-1 text-xs text-muted transition-colors hover:border-accent-500/40 hover:text-[rgb(var(--text))] cursor-default">
+              <motion.div key={step} variants={stepV} className="flex items-center gap-1.5">
+                <span className="cursor-default rounded-md border border-default bg-[rgb(var(--bg))] px-3 py-1 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
                   {step}
                 </span>
-                {i < arr.length - 1 && <span className="text-accent-500/40 text-xs" aria-hidden="true">↓</span>}
-              </div>
+                {i < arr.length - 1 && (
+                  <span className="text-xs text-accent-500/40" aria-hidden="true">↓</span>
+                )}
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </Section>

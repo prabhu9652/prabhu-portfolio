@@ -22,7 +22,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-accent-500"
             >
               <Linkedin className="h-3.5 w-3.5" />
             </a>
@@ -31,14 +31,14 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-accent-500"
             >
               <Github className="h-3.5 w-3.5" />
             </a>
             <a
               href={`mailto:${profile.email}`}
               aria-label="Email"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-colors hover:border-accent-500/40 hover:text-accent-500"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-accent-500"
             >
               <Mail className="h-3.5 w-3.5" />
             </a>
@@ -46,7 +46,7 @@ export function Footer() {
 
           <a
             href="#hero"
-            className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-3 py-2 text-xs text-muted transition-colors hover:text-[rgb(var(--text))] hover:border-accent-500/40"
+            className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-3 py-2 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))]"
           >
             <ArrowUp className="h-3.5 w-3.5" />
             Back to top

@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { fadeUp } from '@/lib/motion';
 
 export function SectionHeader({
   eyebrow,
@@ -12,12 +13,17 @@ export function SectionHeader({
   description?: string;
   align?: 'left' | 'center';
 }) {
+  const prefersReduced = useReducedMotion() ?? false;
+  const variants = prefersReduced
+    ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.2 } } }
+    : fadeUp(0, 14);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.45 }}
+      variants={variants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-72px' }}
       className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}
     >
       {eyebrow && (

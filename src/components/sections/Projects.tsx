@@ -1,12 +1,21 @@
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { projectCategories, projects } from '@/data/portfolio';
 import { Section, SectionHeader } from '@/components/ui/Section';
+import { accordionBody, reducedVariants } from '@/lib/motion';
 
 export function Projects() {
   const [filter, setFilter] = useState('All');
   const [expanded, setExpanded] = useState<string | null>(null);
+  const prefersReduced = useReducedMotion() ?? false;
+
+  const bodyV = prefersReduced
+    ? {
+        collapsed: { opacity: 0, height: 0, transition: { duration: 0.15 } },
+        expanded:  { opacity: 1, height: 'auto', transition: { duration: 0.15 } },
+      }
+    : accordionBody;
 
   const filtered = useMemo(
     () => (filter === 'All' ? projects : projects.filter((p) => p.category === filter)),
@@ -16,9 +25,9 @@ export function Projects() {
   return (
     <Section id="projects" className="border-t border-default">
       <SectionHeader
-        eyebrow="8 case studies · Infrastructure to AI"
+        eyebrow="Infrastructure · Kubernetes · Security · AI"
         title="Engineering case studies"
-        description="Eight production systems — each showing architecture decisions, technologies used and engineering challenges solved."
+        description="Production systems across cloud migrations, Kubernetes platforms, observability stacks, DevSecOps pipelines and AI/RAG infrastructure — each with real architecture decisions."
       />
 
       {/* Filter bar */}
@@ -28,7 +37,7 @@ export function Projects() {
             key={cat}
             onClick={() => { setFilter(cat); setExpanded(null); }}
             aria-pressed={filter === cat}
-            className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-all ${
+            className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-[color,border-color,background-color] duration-150 ${
               filter === cat
                 ? 'border-accent-500/40 bg-accent-500/10 text-accent-500'
                 : 'border-default bg-elev text-muted hover:border-accent-500/30 hover:text-[rgb(var(--text))]'
@@ -39,6 +48,7 @@ export function Projects() {
         ))}
       </div>
 
+      {/* Card grid */}
       <div className="mt-6 grid gap-3 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => {
@@ -49,12 +59,12 @@ export function Projects() {
             return (
               <motion.article
                 key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.25, delay: i * 0.03 }}
-                className={`flex flex-col overflow-hidden rounded-xl border bg-elev transition-colors ${
+                layout="position"
+                initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={prefersReduced ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.22, delay: Math.min(i * 0.04, 0.16) }}
+                className={`flex flex-col overflow-hidden rounded-xl border bg-elev transition-[border-color] duration-200 ${
                   open ? 'border-accent-500/40' : 'border-default hover:border-accent-500/20'
                 }`}
               >
@@ -66,7 +76,9 @@ export function Projects() {
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2.5">
-                      <span className="font-mono text-[11px] font-medium text-accent-500/80">{project.id}</span>
+                      <span className="font-mono text-[11px] font-medium text-accent-500/70">
+                        {project.id}
+                      </span>
                       <span className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
                         {project.category}
                       </span>
@@ -81,21 +93,25 @@ export function Projects() {
                   />
                 </button>
 
-                {/* Expandable detail */}
+                {/* Expandable detail — sequenced accordion */}
                 <AnimatePresence initial={false}>
                   {open && (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                      key={`detail-${project.id}`}
+                      variants={bodyV}
+                      initial="collapsed"
+                      animate="expanded"
+                      exit="collapsed"
                       className="overflow-hidden"
                     >
-                      <div className="px-5 pb-5 pt-1 sm:px-6">
+                      <div className="px-5 pb-5 pt-2 sm:px-6">
                         <ul className="space-y-1.5" aria-label="Project details">
                           {project.points.map((pt) => (
                             <li key={pt} className="flex gap-2.5 text-sm text-muted">
-                              <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-500/60" aria-hidden="true" />
+                              <ArrowUpRight
+                                className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-500/60"
+                                aria-hidden="true"
+                              />
                               {pt}
                             </li>
                           ))}
@@ -108,10 +124,12 @@ export function Projects() {
                             <div className="flex flex-wrap items-center gap-1.5">
                               {(project as typeof project & { flow: string[] }).flow.map((step, si, arr) => (
                                 <div key={step} className="flex items-center gap-1.5">
-                                  <span className="rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted hover:border-accent-500/40 hover:text-[rgb(var(--text))] transition-colors cursor-default">
+                                  <span className="cursor-default rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
                                     {step}
                                   </span>
-                                  {si < arr.length - 1 && <span className="text-accent-500/40 text-xs" aria-hidden="true">→</span>}
+                                  {si < arr.length - 1 && (
+                                    <span className="text-xs text-accent-500/40" aria-hidden="true">→</span>
+                                  )}
                                 </div>
                               ))}
                             </div>
@@ -121,8 +139,12 @@ export function Projects() {
                         {/* Achievement */}
                         {hasAchievement && (
                           <div className="mt-4 rounded-lg border border-accent-500/20 bg-accent-500/5 p-3">
-                            <p className="text-xs font-medium text-accent-500">{(project as typeof project & { achievement: { title: string; detail: string } }).achievement.title}</p>
-                            <p className="mt-1 text-xs leading-relaxed text-muted">{(project as typeof project & { achievement: { title: string; detail: string } }).achievement.detail}</p>
+                            <p className="text-xs font-medium text-accent-500">
+                              {(project as typeof project & { achievement: { title: string; detail: string } }).achievement.title}
+                            </p>
+                            <p className="mt-1 text-xs leading-relaxed text-muted">
+                              {(project as typeof project & { achievement: { title: string; detail: string } }).achievement.detail}
+                            </p>
                           </div>
                         )}
                       </div>
