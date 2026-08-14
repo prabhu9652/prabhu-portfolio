@@ -14,13 +14,13 @@ export function Contact() {
       <div className="overflow-hidden rounded-2xl border border-default bg-elev">
         <div className="grid lg:grid-cols-2">
 
-          {/* Left — CTA */}
+          {/* Left — CTA + Resume */}
           <div className="relative p-8 sm:p-10">
-            <div className="pointer-events-none absolute left-0 top-0 h-48 w-48 rounded-full bg-accent-500/8 blur-[80px]" />
+            <div className="pointer-events-none absolute left-0 top-0 h-48 w-48 rounded-full bg-accent-500/[0.08] blur-[80px]" />
             <div className="relative">
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Let's work together</h2>
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
-                Open to senior SRE, DevOps, DevSecOps, Cloud and Platform Engineering roles. Happy to discuss opportunities.
+                Open to senior SRE, DevOps, DevSecOps, Cloud and Platform Engineering roles.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
@@ -34,49 +34,45 @@ export function Contact() {
                 <CopyButton text={profile.email} label="Copy email" />
               </div>
 
-              {/* Resume */}
+              {/* Resume — grouped with the CTA, not separated by a divider */}
               {hasResume && (
-                <div className="mt-6 border-t border-default pt-6">
-                  <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-muted">Resume</p>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => viewResume(profile.resumeUrl)}
-                      className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
-                    >
-                      <Eye className="h-3.5 w-3.5" />
-                      View
-                    </button>
-                    <button
-                      onClick={() => downloadResume(profile.resumeUrl)}
-                      className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
-                    >
-                      <Download className="h-3.5 w-3.5" />
-                      Download
-                    </button>
-                  </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <button
+                    onClick={() => viewResume(profile.resumeUrl)}
+                    className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                    View Resume
+                  </button>
+                  <button
+                    onClick={() => downloadResume(profile.resumeUrl)}
+                    className="inline-flex items-center gap-2 rounded-lg border border-default bg-[rgb(var(--bg))] px-4 py-2 text-sm font-medium text-muted transition-all hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.98]"
+                  >
+                    <Download className="h-3.5 w-3.5" />
+                    Download
+                  </button>
                 </div>
               )}
-
-              {/* Education — compact, below resume */}
-              <div className="mt-6 border-t border-default pt-6">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted">Education</p>
-                <p className="mt-1.5 text-sm font-medium">{education.degree} · {education.branch}</p>
-                <p className="text-xs text-muted">{education.institution}</p>
-                <p className="text-xs text-muted">{education.university} · {education.graduation}</p>
-              </div>
             </div>
           </div>
 
-          {/* Right — contact rows */}
+          {/* Right — contact details */}
           <div className="border-t border-default p-8 sm:p-10 lg:border-l lg:border-t-0">
             <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted">Get in touch</p>
             <div className="space-y-2">
               <ContactRow icon={<Mail className="h-4 w-4" />} label="Email" value={profile.email} href={`mailto:${profile.email}`} />
               <ContactRow icon={<Phone className="h-4 w-4" />} label="Phone" value={profile.phone} href={`tel:${profile.phone.replace(/\s/g, '')}`} />
-              <ContactRow icon={<Linkedin className="h-4 w-4" />} label="LinkedIn" value="linkedin.com/in/karni-prabhu-aa7a68241" href={profile.linkedin} />
+              <ContactRow icon={<Linkedin className="h-4 w-4" />} label="LinkedIn" value="karni-prabhu-aa7a68241" href={profile.linkedin} />
               {hasGithub && (
-                <ContactRow icon={<Github className="h-4 w-4" />} label="GitHub" value="github.com/prabhu9652" href={profile.github} />
+                <ContactRow icon={<Github className="h-4 w-4" />} label="GitHub" value="prabhu9652" href={profile.github} />
               )}
+            </div>
+
+            {/* Education — in the contact column, less prominent */}
+            <div className="mt-6 pt-5 border-t border-default">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted">Education</p>
+              <p className="mt-1.5 text-sm text-[rgb(var(--text))]">{education.degree} · {education.branch}</p>
+              <p className="text-xs text-muted">{education.institution} · {education.graduation}</p>
             </div>
           </div>
         </div>
@@ -91,11 +87,11 @@ function ContactRow({ icon, label, value, href }: { icon: React.ReactNode; label
       href={href}
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      initial={{ opacity: 0, x: 10 }}
+      initial={{ opacity: 0, x: 8 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.35 }}
-      className="group flex items-center justify-between gap-3 rounded-lg border border-default bg-[rgb(var(--bg))] p-3.5 transition-all hover:border-accent-500/30 hover:-translate-y-0.5"
+      transition={{ duration: 0.3 }}
+      className="group flex items-center justify-between gap-3 rounded-lg border border-default bg-[rgb(var(--bg))] p-3.5 transition-all hover:border-accent-500/30"
     >
       <div className="flex items-center gap-3">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-default bg-elev text-accent-500">

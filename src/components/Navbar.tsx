@@ -94,7 +94,7 @@ export function Navbar({ theme, onToggleTheme }: { theme: 'dark' | 'light'; onTo
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
           <a
-            href="#resume"
+            href="#contact"
             className="hidden rounded-lg border border-accent-500/40 bg-accent-500/10 px-4 py-2 text-sm font-medium text-accent-500 transition-colors hover:bg-accent-500/20 sm:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
           >
             Resume
@@ -145,7 +145,7 @@ export function Navbar({ theme, onToggleTheme }: { theme: 'dark' | 'light'; onTo
                 );
               })}
               <a
-                href="#resume"
+                href="#contact"
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-lg border border-accent-500/40 bg-accent-500/10 px-3 py-2.5 text-sm font-medium text-accent-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
               >

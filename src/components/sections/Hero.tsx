@@ -19,7 +19,7 @@ export function Hero() {
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 grid-pattern opacity-[0.35] mask-fade-b" />
-        <div className="absolute left-1/2 top-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-accent-500/8 blur-[140px]" />
+        <div className="absolute left-1/2 top-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-accent-500/[0.08] blur-[140px]" />
       </div>
 
       <div className="container-max section-padding">

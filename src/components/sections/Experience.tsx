@@ -11,7 +11,7 @@ export function Experience() {
   return (
     <Section id="experience" className="border-t border-default">
       <SectionHeader
-        eyebrow="Experience"
+        eyebrow="Techverito · Social Alpha · IDSL"
         title="Nine years of production engineering"
         description="From Linux and automation foundations at IDSL through DevOps at Social Alpha to senior SRE work at Techverito — progressing in scope, depth and responsibility at each stage."
       />

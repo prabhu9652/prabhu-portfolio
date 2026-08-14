@@ -16,7 +16,7 @@ export function AIEngineering() {
   return (
     <Section id="ai" className="border-t border-default">
       <SectionHeader
-        eyebrow="AI Engineering"
+        eyebrow="Bedrock · LangChain · LangGraph · MCP · RAG"
         title="AI infrastructure and application engineering"
         description="Building RAG pipelines, agentic workflows and MCP servers that connect AI models to real infrastructure and data — applying the same engineering rigor used for cloud systems."
       />
@@ -102,7 +102,7 @@ export function AIEngineering() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.15 }}
-        className="mt-5 text-xs leading-relaxed text-muted/70"
+        className="mt-5 text-xs leading-relaxed text-muted border-l-2 border-default pl-3"
       >
         AI is a supporting capability — the primary practice is SRE, DevOps, DevSecOps and cloud platform engineering. AI tooling is applied where it solves real infrastructure and operational problems.
       </motion.p>

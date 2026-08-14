@@ -8,7 +8,7 @@ const lifecycle = [
   'IaC (Terraform)',
   'Kubernetes',
   'CI/CD',
-  'Deploy',
+  'Deployment',
   'Observability',
   'Security',
   'DR / Recovery',
@@ -18,7 +18,7 @@ export function TechStack() {
   return (
     <Section id="stack" className="border-t border-default">
       <SectionHeader
-        eyebrow="Technology Stack"
+        eyebrow="Cloud · IaC · Containers · Security · AI"
         title="Tools across the full platform lifecycle"
         description="Organized by engineering domain — not an exhaustive list, but the technologies I use daily to design, automate and operate production systems."
       />
@@ -29,9 +29,9 @@ export function TechStack() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.5 }}
-        className="mt-10 overflow-x-auto"
+        className="mt-8 overflow-x-auto pb-1"
       >
-        <div className="flex min-w-max items-center gap-0 rounded-xl border border-default bg-elev">
+        <div className="flex min-w-max items-center rounded-xl border border-default bg-elev">
           {lifecycle.map((stage, i) => (
             <div key={stage} className="flex items-center">
               <div className={`px-4 py-3 text-xs font-medium transition-colors hover:text-accent-500 ${

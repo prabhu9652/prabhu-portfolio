@@ -16,7 +16,7 @@ export function Projects() {
   return (
     <Section id="projects" className="border-t border-default">
       <SectionHeader
-        eyebrow="Projects"
+        eyebrow="8 case studies · Infrastructure to AI"
         title="Engineering case studies"
         description="Eight production systems — each showing architecture decisions, technologies used and engineering challenges solved."
       />
@@ -28,7 +28,7 @@ export function Projects() {
             key={cat}
             onClick={() => { setFilter(cat); setExpanded(null); }}
             aria-pressed={filter === cat}
-            className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+            className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-all ${
               filter === cat
                 ? 'border-accent-500/40 bg-accent-500/10 text-accent-500'
                 : 'border-default bg-elev text-muted hover:border-accent-500/30 hover:text-[rgb(var(--text))]'

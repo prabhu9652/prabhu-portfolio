@@ -12,7 +12,7 @@ export function Footer() {
             </span>
             <div>
               <div className="text-sm font-semibold">{profile.name}</div>
-              <div className="text-xs text-muted">{profile.role}</div>
+              <div className="text-xs text-muted">Senior SRE · DevOps · Cloud Engineer</div>
             </div>
           </div>
 

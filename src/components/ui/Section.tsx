@@ -14,20 +14,20 @@ export function SectionHeader({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.45 }}
       className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}
     >
       {eyebrow && (
-        <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.2em] text-accent-500">
+        <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.18em] text-accent-500/80">
           {eyebrow}
         </span>
       )}
-      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{description}</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">{description}</p>
       )}
     </motion.div>
   );
@@ -45,7 +45,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`section-padding py-20 sm:py-28 ${className}`}
+      className={`section-padding py-16 sm:py-24 ${className}`}
     >
       <div className="container-max">{children}</div>
     </section>

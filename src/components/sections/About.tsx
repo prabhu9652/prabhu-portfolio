@@ -11,12 +11,12 @@ export function About() {
   return (
     <Section id="about" className="border-t border-default">
       <SectionHeader
-        eyebrow="About"
+        eyebrow="9 years · AWS · Kubernetes · Terraform"
         title="Senior SRE & Cloud Engineer"
         description={summary}
       />
 
-      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((cap, i) => (
           <motion.div
             key={cap.title}
