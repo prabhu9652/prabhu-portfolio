@@ -25,7 +25,8 @@ export async function viewResume(url: string) {
       new Blob([blob], { type: 'application/pdf' })
     );
     window.open(blobUrl, '_blank', 'noopener,noreferrer');
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+    // Revoke after 5 minutes — enough time for the PDF viewer to fully load
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 300_000);
   } catch {
     window.open(url, '_blank', 'noopener,noreferrer');
   }

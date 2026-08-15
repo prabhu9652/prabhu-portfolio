@@ -1,12 +1,24 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
-import { projectCategories, projects } from '@/data/portfolio';
+import { type ProjectEntry, PROJECT_CATEGORIES, projects } from '@/data/portfolio';
 import { Section, SectionHeader } from '@/components/ui/Section';
 import { accordionBody, reducedVariants } from '@/lib/motion';
 
+// 'All' is a UI filter state, not a data category
+const filterOptions = ['All', ...PROJECT_CATEGORIES] as const;
+type FilterOption = (typeof filterOptions)[number];
+
+function hasFlow(p: ProjectEntry): p is ProjectEntry & { flow: string[] } {
+  return 'flow' in p && Array.isArray((p as { flow?: unknown }).flow);
+}
+
+function hasAchievement(p: ProjectEntry): p is ProjectEntry & { achievement: { title: string; detail: string } } {
+  return 'achievement' in p && typeof (p as { achievement?: unknown }).achievement === 'object';
+}
+
 export function Projects() {
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState<FilterOption>('All');
   const [expanded, setExpanded] = useState<string | null>(null);
   const prefersReduced = useReducedMotion() ?? false;
 
@@ -31,8 +43,8 @@ export function Projects() {
       />
 
       {/* Filter bar */}
-      <div className="mt-8 flex flex-wrap gap-1.5" role="group" aria-label="Filter projects by category">
-        {projectCategories.map((cat) => (
+      <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+        {filterOptions.map((cat) => (
           <button
             key={cat}
             onClick={() => { setFilter(cat); setExpanded(null); }}
@@ -49,12 +61,10 @@ export function Projects() {
       </div>
 
       {/* Card grid */}
-      <div className="mt-6 grid gap-3 md:grid-cols-2">
+      <div className="mt-8 grid gap-3 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => {
             const open = expanded === project.id;
-            const hasFlow = 'flow' in project && Array.isArray(project.flow);
-            const hasAchievement = 'achievement' in project && project.achievement;
 
             return (
               <motion.article
@@ -76,7 +86,7 @@ export function Projects() {
                 >
                   <div className="min-w-0">
                     <div className="flex items-center gap-2.5">
-                      <span className="font-mono text-[11px] font-medium text-accent-500/70">
+                      <span className="font-mono text-[11px] font-medium text-accent-500/90">
                         {project.id}
                       </span>
                       <span className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-muted">
@@ -93,7 +103,7 @@ export function Projects() {
                   />
                 </button>
 
-                {/* Expandable detail — sequenced accordion */}
+            {/* Expandable detail — sequenced accordion */}
                 <AnimatePresence initial={false}>
                   {open && (
                     <motion.div
@@ -118,11 +128,11 @@ export function Projects() {
                         </ul>
 
                         {/* Engineering flow */}
-                        {hasFlow && (
+                        {hasFlow(project) && (
                           <div className="mt-4">
                             <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-muted">Flow</p>
                             <div className="flex flex-wrap items-center gap-1.5">
-                              {(project as typeof project & { flow: string[] }).flow.map((step, si, arr) => (
+                              {project.flow.map((step, si, arr) => (
                                 <div key={step} className="flex items-center gap-1.5">
                                   <span className="cursor-default rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))]">
                                     {step}
@@ -137,13 +147,13 @@ export function Projects() {
                         )}
 
                         {/* Achievement */}
-                        {hasAchievement && (
+                        {hasAchievement(project) && (
                           <div className="mt-4 rounded-lg border border-accent-500/20 bg-accent-500/5 p-3">
                             <p className="text-xs font-medium text-accent-500">
-                              {(project as typeof project & { achievement: { title: string; detail: string } }).achievement.title}
+                              {project.achievement.title}
                             </p>
                             <p className="mt-1 text-xs leading-relaxed text-muted">
-                              {(project as typeof project & { achievement: { title: string; detail: string } }).achievement.detail}
+                              {project.achievement.detail}
                             </p>
                           </div>
                         )}

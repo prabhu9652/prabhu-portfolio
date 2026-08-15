@@ -15,9 +15,9 @@ function App() {
 
   return (
     <>
-      {/* Skip navigation — visible on focus for keyboard users */}
+      {/* Skip navigation — targets main content, visible on keyboard focus */}
       <a
-        href="#about"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-accent-500 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ink-950"
       >
         Skip to main content

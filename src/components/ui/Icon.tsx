@@ -1,7 +1,6 @@
 import {
   Activity,
   BrainCircuit,
-  ClipboardCheck,
   GitMerge,
   Globe,
   LifeBuoy,
@@ -16,7 +15,6 @@ import type { LucideIcon } from 'lucide-react';
 const iconMap: Record<string, LucideIcon> = {
   Activity,
   BrainCircuit,
-  ClipboardCheck,
   GitMerge,
   Globe,
   LifeBuoy,

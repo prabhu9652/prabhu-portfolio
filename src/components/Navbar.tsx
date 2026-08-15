@@ -5,16 +5,9 @@ import { navLinks, profile } from '@/data/portfolio';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { mobileMenu, mobileMenuContainer, mobileMenuItem, reducedVariants } from '@/lib/motion';
 
-const sectionIds = [
-  'hero',
-  'about',
-  'experience',
-  'projects',
-  'stack',
-  'security-dr',
-  'ai',
-  'contact',
-];
+// Derived from navLinks so the two never go out of sync.
+// Hero is tracked for scroll-spy but has no nav link.
+const sectionIds = ['hero', ...navLinks.map((l) => l.href.slice(1))];
 
 export function Navbar({ theme, onToggleTheme }: { theme: 'dark' | 'light'; onToggleTheme: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +40,6 @@ export function Navbar({ theme, onToggleTheme }: { theme: 'dark' | 'light'; onTo
 
   return (
     <header
-      role="banner"
       className={`fixed inset-x-0 top-0 z-50 transition-[border-color,background-color,backdrop-filter] duration-200 ${
         scrolled
           ? 'border-b border-default bg-[rgb(var(--bg))]/85 backdrop-blur-xl'
@@ -55,7 +47,6 @@ export function Navbar({ theme, onToggleTheme }: { theme: 'dark' | 'light'; onTo
       }`}
     >
       <nav
-        role="navigation"
         aria-label="Main navigation"
         className="container-max flex h-16 items-center justify-between px-5 sm:px-8 lg:px-12"
       >

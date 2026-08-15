@@ -24,35 +24,37 @@ export function TechStack() {
   return (
     <Section id="stack" className="border-t border-default">
       <SectionHeader
-        eyebrow="10 technology domains"
+        eyebrow="Technology domains"
         title="Tools across the full platform lifecycle"
         description="Organized by engineering domain — not an exhaustive list, but the technologies I use daily to design, automate and operate production systems."
       />
 
-      {/* Lifecycle strip — fades up as a unit */}
+      {/* Lifecycle strip — scrollable on mobile */}
       <motion.div
         variants={stripV}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: '-60px' }}
-        className="mt-8 overflow-x-auto pb-1"
         aria-label="Engineering lifecycle"
+        className="relative mt-8 mask-fade-r"
       >
-        <div className="flex min-w-max items-center rounded-xl border border-default bg-elev">
-          {lifecycle.map((stage, i) => (
-            <div key={stage} className="flex items-center">
-              <span
-                className={`px-4 py-3 text-xs font-medium transition-[color] duration-150 hover:text-accent-500 ${
-                  i === 0 ? 'text-accent-500' : 'text-muted'
-                }`}
-              >
-                {stage}
-              </span>
-              {i < lifecycle.length - 1 && (
-                <span className="text-sm text-accent-500/30" aria-hidden="true">›</span>
-              )}
-            </div>
-          ))}
+        <div className="overflow-x-auto pb-1">
+          <div className="flex min-w-max items-center rounded-xl border border-default bg-elev">
+            {lifecycle.map((stage, i) => (
+              <div key={stage} className="flex items-center">
+                <span
+                  className={`px-4 py-3 text-xs font-medium ${
+                    i === 0 ? 'text-accent-500' : 'text-muted'
+                  }`}
+                >
+                  {stage}
+                </span>
+                {i < lifecycle.length - 1 && (
+                  <span className="text-xs text-accent-500/40" aria-hidden="true">›</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
 
@@ -76,7 +78,7 @@ export function TechStack() {
               {group.items.map((item) => (
                 <span
                   key={item}
-                  className="inline-flex cursor-default items-center rounded-lg border border-default bg-elev px-3 py-1.5 text-sm text-muted transition-[color,border-color,transform] duration-150 hover:-translate-y-px hover:border-accent-500/40 hover:text-[rgb(var(--text))]"
+                  className="inline-flex cursor-default items-center rounded-md border border-default bg-[rgb(var(--bg))] px-3 py-1.5 text-xs text-muted transition-[color,border-color] duration-150 hover:border-accent-500/50 hover:text-[rgb(var(--text))]"
                 >
                   {item}
                 </span>

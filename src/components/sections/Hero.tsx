@@ -17,11 +17,11 @@ export function Hero() {
   const statsV     = reducedVariants(heroStatVariants, prefersReduced);
 
   return (
-    <section id="hero" className="relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40">
-      {/* Background */}
+    <section id="hero" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36">
+      {/* Background — grid pattern defined in index.css */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 grid-pattern opacity-[0.35] mask-fade-b" />
-        <div className="absolute left-1/2 top-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full bg-accent-500/[0.08] blur-[140px]" />
+        <div className="absolute inset-0 grid-pattern opacity-[0.6] mask-fade-b" />
+        <div className="absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-accent-500/[0.06] blur-[120px]" />
       </div>
 
       <div className="container-max section-padding">
@@ -32,41 +32,44 @@ export function Hero() {
           className="max-w-3xl"
         >
           {/* Availability pill */}
-          <motion.div variants={itemV} className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-default bg-elev px-4 py-1.5">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-500 opacity-50" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-500" />
+          <motion.div
+            variants={itemV}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-default bg-elev px-3.5 py-1.5"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-500 opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-500" />
             </span>
-            <span className="text-xs font-medium text-muted">
-              Open to SRE · DevOps · DevSecOps · Cloud · Platform Engineering roles
+            <span className="text-xs text-muted">
+              Open to roles in SRE, DevOps, DevSecOps, Cloud and Platform Engineering
             </span>
           </motion.div>
 
           {/* Name */}
           <motion.h1
             variants={itemV}
-            className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-[4.25rem] lg:leading-[1.08]"
+            className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-[4rem] lg:leading-[1.1]"
           >
             {profile.name}
           </motion.h1>
 
-          {/* Primary role — clear, single title */}
-          <motion.p variants={itemV} className="mt-4 font-mono text-sm text-accent-500 sm:text-base">
+          {/* Primary role */}
+          <motion.p variants={itemV} className="mt-3 font-mono text-sm text-accent-500 sm:text-base">
             {profile.role}
           </motion.p>
 
-          {/* Supporting context — breadth without clutter */}
-          <motion.p variants={itemV} className="mt-1 text-xs text-muted sm:text-sm">
+          {/* Supporting context */}
+          <motion.p variants={itemV} className="mt-0.5 text-xs text-muted sm:text-sm">
             {profile.roleContext}
           </motion.p>
 
-          {/* Tagline — concrete, not generic */}
-          <motion.p variants={itemV} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+          {/* Tagline */}
+          <motion.p variants={itemV} className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             {profile.tagline}
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={itemV} className="mt-8 flex flex-wrap items-center gap-3">
+          <motion.div variants={itemV} className="mt-7 flex flex-wrap items-center gap-2.5">
             <a
               href="#experience"
               className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-[background-color,transform] duration-150 hover:bg-accent-400 active:scale-[0.97]"
@@ -76,13 +79,13 @@ export function Hero() {
             </a>
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-[color,border-color,background-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.97]"
+              className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent-500/50 hover:text-[rgb(var(--text))] active:scale-[0.97]"
             >
               Projects
             </a>
             <button
               onClick={() => downloadResume(profile.resumeUrl)}
-              className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-[color,border-color,background-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))] active:scale-[0.97]"
+              className="inline-flex items-center gap-2 rounded-lg border border-default bg-elev px-5 py-2.5 text-sm font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent-500/50 hover:text-[rgb(var(--text))] active:scale-[0.97]"
             >
               <Download className="h-4 w-4" />
               Resume
@@ -102,7 +105,7 @@ export function Hero() {
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-accent-500"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-default bg-elev text-muted transition-[color,border-color] duration-150 hover:border-accent-500/50 hover:text-accent-500"
               >
                 <Icon className="h-4 w-4" />
               </a>
@@ -110,24 +113,21 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Stats bar */}
+        {/* Stats bar — purely informational, no hover state */}
         <motion.div
           variants={statsV}
           initial="hidden"
           animate="show"
-          className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-default bg-[rgb(var(--border))] sm:grid-cols-3 lg:grid-cols-5"
+          className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-default bg-[rgb(var(--border))] sm:grid-cols-3 lg:grid-cols-5"
         >
-          {heroStats.map((stat, i) => (
-            <motion.div
+          {heroStats.map((stat) => (
+            <div
               key={stat.label}
-              initial={prefersReduced ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, delay: 0.38 + i * 0.05 }}
-              className="bg-elev px-5 py-4 transition-[background-color] duration-150 hover:bg-[rgb(var(--bg))]"
+              className="bg-elev px-4 py-3.5"
             >
-              <div className="font-mono text-sm font-semibold text-accent-500 sm:text-base leading-snug">{stat.value}</div>
-              <div className="mt-1 text-[11px] uppercase tracking-wider text-muted">{stat.label}</div>
-            </motion.div>
+              <div className="font-mono text-sm font-semibold leading-snug text-accent-500">{stat.value}</div>
+              <div className="mt-0.5 text-[10px] uppercase tracking-widest text-muted">{stat.label}</div>
+            </div>
           ))}
         </motion.div>
       </div>

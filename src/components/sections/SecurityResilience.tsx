@@ -43,31 +43,30 @@ export function SecurityResilience() {
         description="Security is embedded into the delivery lifecycle, not bolted on at the end. Disaster recovery is planned, tested and validated — not improvised during an incident."
       />
 
-      {/* Capability cards — staggered */}
+      {/* Capability cards — staggered, equal height */}
       <motion.div
         variants={cardsV}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: '-60px' }}
-        className="mt-12 grid gap-3 md:grid-cols-3"
+        className="mt-10 grid gap-3 md:grid-cols-3"
       >
         {securityResilienceCards.map((card) => (
           <motion.div
             key={card.title}
             variants={cardV}
-            className="group relative overflow-hidden rounded-xl border border-default bg-elev p-5 transition-[border-color,transform] duration-200 hover:border-accent-500/40 hover:-translate-y-px"
+            className="flex h-full flex-col rounded-xl border border-default bg-elev p-5 transition-[border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-accent-500/50"
           >
-            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-accent-500/5 blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-lg border border-default bg-[rgb(var(--bg))] text-accent-500">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-500/10 text-accent-500">
               <Icon name={card.icon} className="h-4 w-4" />
             </div>
-            <h3 className="relative mt-3.5 text-sm font-semibold">{card.title}</h3>
-            <p className="relative mt-1.5 text-xs leading-relaxed text-muted">{card.description}</p>
-            <div className="relative mt-3 flex flex-wrap gap-1">
+            <h3 className="mt-3.5 text-sm font-semibold">{card.title}</h3>
+            <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted">{card.description}</p>
+            <div className="mt-3 flex flex-wrap gap-1">
               {card.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[10px] text-muted"
+                  className="rounded border border-default bg-[rgb(var(--bg))] px-1.5 py-0.5 text-[11px] text-muted"
                 >
                   {tag}
                 </span>

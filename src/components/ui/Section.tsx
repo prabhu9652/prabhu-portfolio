@@ -16,7 +16,7 @@ export function SectionHeader({
   const prefersReduced = useReducedMotion() ?? false;
   const variants = prefersReduced
     ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.2 } } }
-    : fadeUp(0, 14);
+    : fadeUp(0, 12);
 
   return (
     <motion.div
@@ -27,13 +27,17 @@ export function SectionHeader({
       className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}
     >
       {eyebrow && (
-        <span className="mb-3 inline-block font-mono text-xs uppercase tracking-[0.18em] text-accent-500/80">
+        /*
+         * Eyebrow: metadata-level, not heading-level.
+         * Uses 10px / widest tracking so it reads as a label, not a title.
+         */
+        <p className="mb-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
           {eyebrow}
-        </span>
+        </p>
       )}
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+      <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{title}</h2>
       {description && (
-        <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">{description}</p>
+        <p className="mt-2.5 text-sm leading-relaxed text-muted">{description}</p>
       )}
     </motion.div>
   );
@@ -51,7 +55,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`section-padding py-16 sm:py-24 ${className}`}
+      className={`section-padding py-16 sm:py-20 ${className}`}
     >
       <div className="container-max">{children}</div>
     </section>

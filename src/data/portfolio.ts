@@ -1,9 +1,114 @@
-export const profile = {
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+export interface Profile {
+  name: string;
+  role: string;
+  roleContext: string;
+  tagline: string;
+  email: string;
+  phone: string;
+  linkedin: string;
+  github: string;
+  resumeUrl: string;
+}
+
+export interface Stat {
+  label: string;
+  value: string;
+}
+
+export interface Capability {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TechGroup {
+  category: string;
+  items: string[];
+}
+
+interface BaseExperience {
+  company: string;
+  role: string;
+  period: string;
+  current?: boolean;
+  summary: string;
+  keyHighlights: string[]; // shown in the accordion header without clicking
+  highlights: string[];
+  stack: string[];
+}
+
+interface ExperienceWithClient extends BaseExperience {
+  client: string;
+}
+
+interface ExperienceWithAchievement extends BaseExperience {
+  achievement: { title: string; detail: string };
+}
+
+interface ExperienceWithProgression extends BaseExperience {
+  progression: string[];
+}
+
+export type ExperienceEntry =
+  | BaseExperience
+  | ExperienceWithClient
+  | ExperienceWithAchievement
+  | ExperienceWithProgression;
+
+interface BaseProject {
+  id: string;
+  category: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  points: string[];
+  stack: string[];
+}
+
+interface ProjectWithFlow extends BaseProject {
+  flow: string[];
+}
+
+interface ProjectWithAchievement extends BaseProject {
+  achievement: { title: string; detail: string };
+}
+
+export type ProjectEntry = BaseProject | ProjectWithFlow | ProjectWithAchievement;
+
+export interface SecurityCard {
+  icon: string;
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+export interface Education {
+  institution: string;
+  university: string;
+  degree: string;
+  branch: string;
+  graduation: string;
+}
+
+// ---------------------------------------------------------------------------
+// Profile
+// ---------------------------------------------------------------------------
+
+export const profile: Profile = {
   name: 'Prabhu Karni',
   role: 'Senior Site Reliability Engineer',
   roleContext: 'DevOps · DevSecOps · Cloud & Platform Engineering',
   tagline:
-    'Building reliable, secure and scalable production infrastructure — across AWS, Azure, GCP and DigitalOcean, with Kubernetes, Terraform and Python as the core toolkit.',
+    'Building reliable, secure and scalable production infrastructure — across AWS, Azure, GCP and DigitalOcean, with Kubernetes, Terraform and Python at the core.',
   email: 'karniprabhu0@gmail.com',
   phone: '+91 7013424340',
   linkedin: 'https://www.linkedin.com/in/karni-prabhu-aa7a68241',
@@ -11,15 +116,23 @@ export const profile = {
   resumeUrl: '/SRE_DevOps_Classic.pdf',
 };
 
-export const heroStats = [
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+
+export const heroStats: Stat[] = [
   { label: 'Experience', value: '9+' },
-  { label: 'Cloud', value: 'AWS · Azure · GCP' },
+  { label: 'Cloud', value: 'AWS · Azure · GCP · DO' },
   { label: 'Kubernetes', value: 'EKS · AKS · GKE · RKE2' },
-  { label: 'CI/CD', value: 'GitHub Actions · GitLab · Jenkins' },
+  { label: 'IaC', value: 'Terraform · Terragrunt' },
   { label: 'Observability', value: 'Prometheus · Grafana · Loki' },
 ];
 
-export const capabilities = [
+// ---------------------------------------------------------------------------
+// Capabilities (About section)
+// ---------------------------------------------------------------------------
+
+export const capabilities: Capability[] = [
   {
     icon: 'ShieldCheck',
     title: 'Site Reliability Engineering',
@@ -56,15 +169,13 @@ export const capabilities = [
     description:
       'Security embedded in CI/CD — Trivy, SonarQube, IAM least-privilege, WAF, GuardDuty, Security Hub and Secrets Manager. Shift-left security from commit to runtime.',
   },
-  {
-    icon: 'BrainCircuit',
-    title: 'AI & GenAI Infrastructure',
-    description:
-      'RAG pipelines, agentic workflows and MCP servers built on Amazon Bedrock, LangChain, LangGraph and LangSmith — applying production engineering rigour to AI workloads.',
-  },
 ];
 
-export const techStack: { category: string; items: string[] }[] = [
+// ---------------------------------------------------------------------------
+// Technology stack
+// ---------------------------------------------------------------------------
+
+export const techStack: TechGroup[] = [
   {
     category: 'Cloud Platforms',
     items: ['AWS', 'Azure', 'Google Cloud Platform', 'DigitalOcean'],
@@ -116,16 +227,7 @@ export const techStack: { category: string; items: string[] }[] = [
   },
   {
     category: 'Resilience & DR',
-    items: [
-      'Drata',
-      'SOC 2',
-      'Disaster Recovery',
-      'Backup & Restore',
-    ],
-  },
-  {
-    category: 'Databases',
-    items: ['PostgreSQL', 'MongoDB', 'Neo4j', 'Aurora PostgreSQL', 'Aurora MySQL', 'Redis'],
+    items: ['Drata', 'SOC 2', 'Disaster Recovery', 'Backup & Restore'],
   },
   {
     category: 'Programming & Automation',
@@ -147,14 +249,24 @@ export const techStack: { category: string; items: string[] }[] = [
   },
 ];
 
-export const experience = [
+// ---------------------------------------------------------------------------
+// Experience
+// ---------------------------------------------------------------------------
+
+export const experience: ExperienceEntry[] = [
   {
     company: 'Techverito',
     role: 'Senior SRE',
     client: 'VinylEquity',
-    period: 'Jul 2022 – Jul 2026',
+    period: 'Jul 2022 – Present',
+    current: true,
     summary:
       'Four-year embedded SRE engagement — owning the full AWS platform from infrastructure through Kubernetes delivery, observability, security and AI/RAG capabilities for the VinylEquity product.',
+    keyHighlights: [
+      'AWS multi-account platform · Terraform · Terragrunt',
+      'Hybrid Kubernetes: EKS (cloud) + RKE2 (on-premises) · ArgoCD GitOps',
+      'Full-stack observability · DevSecOps · SOC 2 · Disaster recovery',
+    ],
     highlights: [
       'Architected AWS multi-account infrastructure with Terraform and Terragrunt, standardizing environments through reusable modules and automated deployment pipelines.',
       'Operated production Kubernetes on EKS and RKE2 (on-premises) with Helm and ArgoCD GitOps, managing application lifecycle, scaling and secrets synchronization via External Secrets Operator and Reloader.',
@@ -181,6 +293,11 @@ export const experience = [
     period: 'Feb 2021 – Jul 2022',
     summary:
       'Multi-cloud DevOps engineering across AWS, GCP and DigitalOcean — including a complete migration of six production applications from DigitalOcean to AWS.',
+    keyHighlights: [
+      '6 production applications migrated: DigitalOcean → AWS end-to-end',
+      'Multi-cloud architecture: AWS · GCP · DigitalOcean · Terraform',
+      'Blue-green CI/CD · Prometheus · Grafana · Loki observability',
+    ],
     highlights: [
       'Designed multi-cloud architecture across AWS, GCP and DigitalOcean using Terraform.',
       'Built CI/CD pipelines with Jenkins and GitHub Actions — blue-green and zero-downtime deployments.',
@@ -201,6 +318,11 @@ export const experience = [
     period: 'May 2017 – Dec 2020',
     summary:
       'Built the technical foundations — progressing through four roles over three years while developing deep Linux, networking, automation and multi-cloud infrastructure skills.',
+    keyHighlights: [
+      'Progressed through 4 roles: SE → Linux Admin → Automation Eng → DevOps',
+      'AWS infrastructure: EC2 · S3 · ELB · Elastic Beanstalk · Terraform · VPC',
+      'Multi-cloud Kubernetes: Azure AKS · Google GKE · Jenkins · Docker',
+    ],
     highlights: [
       'Progressed: Software Engineer → Linux Administrator → Automation Engineer → DevOps Engineer.',
       'Built Linux and shell scripting foundations including backup, recovery and operational automation.',
@@ -219,7 +341,25 @@ export const experience = [
   },
 ];
 
-export const projects = [
+// ---------------------------------------------------------------------------
+// Projects
+// ---------------------------------------------------------------------------
+
+// All project categories except 'All' (which is a UI concern, not data)
+export const PROJECT_CATEGORIES = [
+  'Infrastructure',
+  'Kubernetes',
+  'Migration',
+  'Observability',
+  'DevSecOps',
+  'Security',
+  'AI',
+  'Resilience',
+] as const;
+
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number];
+
+export const projects: ProjectEntry[] = [
   {
     id: '01',
     category: 'Infrastructure',
@@ -269,7 +409,8 @@ export const projects = [
     stack: ['AWS', 'DigitalOcean', 'Terraform', 'GitHub Actions', 'Prometheus', 'Grafana'],
     achievement: {
       title: '6 Production Applications Migrated',
-      detail: 'End-to-end: architecture assessment → network redesign → IAM redesign → storage migration → CI/CD modernization → monitoring → security hardening → production cutover with minimal downtime.',
+      detail:
+        'End-to-end: architecture assessment → network redesign → IAM redesign → storage migration → CI/CD modernization → monitoring → security hardening → production cutover with minimal downtime.',
     },
   },
   {
@@ -357,19 +498,11 @@ export const projects = [
   },
 ];
 
-export const projectCategories = [
-  'All',
-  'Infrastructure',
-  'Kubernetes',
-  'Migration',
-  'Observability',
-  'DevSecOps',
-  'Security',
-  'AI',
-  'Resilience',
-];
+// ---------------------------------------------------------------------------
+// Security & DR section
+// ---------------------------------------------------------------------------
 
-export const securityResilienceCards = [
+export const securityResilienceCards: SecurityCard[] = [
   {
     icon: 'ShieldAlert',
     title: 'DevSecOps & Security',
@@ -385,7 +518,7 @@ export const securityResilienceCards = [
     tags: ['Backup & Restore', 'DR Planning', 'Recovery Validation', 'Business Continuity'],
   },
   {
-    icon: 'ClipboardCheck',
+    icon: 'ShieldCheck',
     title: 'Compliance Automation',
     description:
       'SOC 2 support through infrastructure controls, automated evidence collection, Drata workflows and engineering-driven compliance activities.',
@@ -393,7 +526,11 @@ export const securityResilienceCards = [
   },
 ];
 
-export const navLinks = [
+// ---------------------------------------------------------------------------
+// Navigation
+// ---------------------------------------------------------------------------
+
+export const navLinks: NavLink[] = [
   { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
@@ -403,7 +540,11 @@ export const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export const education = {
+// ---------------------------------------------------------------------------
+// Education
+// ---------------------------------------------------------------------------
+
+export const education: Education = {
   institution: 'Kakinada Institute of Engineering and Technology-II',
   university: 'Jawaharlal Nehru Technological University, Kakinada (JNTU-K)',
   degree: 'Bachelor of Technology (B.Tech)',

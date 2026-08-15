@@ -6,15 +6,16 @@
   :root {
     --bg: 250 250 252;
     --bg-elev: 255 255 255;
-    --border: 229 231 235;
+    --border: 224 226 231;
     --text: 17 24 39;
-    --text-muted: 107 114 128;
+    --text-muted: 100 108 122;
   }
 
   .dark {
     --bg: 8 10 12;
-    --bg-elev: 19 22 26;
-    --border: 38 42 48;
+    /* Slightly more lifted than before — was 19 22 26, now 22 26 31 */
+    --bg-elev: 22 26 31;
+    --border: 40 46 54;
     --text: 237 240 243;
     --text-muted: 148 156 170;
   }
@@ -32,21 +33,21 @@
   }
 
   ::selection {
-    background-color: rgb(34 211 238 / 0.25);
-  color: rgb(var(--text));
+    background-color: rgb(34 211 238 / 0.2);
+    color: rgb(var(--text));
   }
 
+  /* Slimmer, less intrusive scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: rgb(var(--bg));
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: rgb(var(--border));
     border-radius: 9999px;
-    border: 2px solid rgb(var(--bg));
   }
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(var(--text-muted));
@@ -74,8 +75,14 @@
     border-color: rgb(var(--border));
   }
 
+  /*
+   * Tag — technology badge.
+   * Uses --bg (base level) as background so it reads as inset/recessed
+   * when placed on an elevated card surface (--bg-elev).
+   * This gives sufficient visual contrast in both light and dark mode.
+   */
   .tag {
-    @apply inline-flex items-center gap-1.5 rounded-md border border-default px-2.5 py-1 text-xs font-medium text-muted transition-[color,border-color] hover:text-[rgb(var(--text))] hover:border-accent-500/40;
+    @apply inline-flex items-center rounded-md border border-default bg-[rgb(var(--bg))] px-2.5 py-1 text-xs font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent-500/40 hover:text-[rgb(var(--text))];
   }
 }
 
@@ -85,16 +92,31 @@
   }
 
   .mask-fade-b {
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Fade right edge — used on horizontally-scrollable strips on mobile */
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+
+  /*
+   * Grid pattern background — used in Hero.
+   * The colour is the border token so it adapts to both light and dark.
+   * Defined here (not in tailwind.config.js) so CSS variables resolve correctly.
+   */
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgb(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 }
 
 /* ---------------------------------------------------------------------------
  * prefers-reduced-motion
- * When the user has requested reduced motion, disable all CSS animations
- * and transitions that involve transform or filter. Framer Motion variants
- * also check this via the useReducedMotion() hook used in each component.
  * --------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,

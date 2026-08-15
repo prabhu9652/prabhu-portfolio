@@ -31,11 +31,11 @@ export function useActiveSection(ids: string[]) {
         });
         pick();
       },
-      // A generous rootMargin so that tall sections (Security & Compliance,
-      // Experience, etc.) register as intersecting even when they fill most of
-      // the viewport.  We shrink only the bottom by 20 % so the section that
-      // occupies the top half of the screen wins.
-      { rootMargin: '-10% 0px -20% 0px', threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] }
+      // Generous rootMargin so tall sections register as intersecting even when
+      // they fill most of the viewport. Bottom shrinks by 20% so the section
+      // occupying the upper viewport wins. Three thresholds are sufficient —
+      // more triggers unnecessary callbacks on scroll.
+      { rootMargin: '-10% 0px -20% 0px', threshold: [0, 0.25, 0.5] }
     );
 
     const currentIds = idsRef.current;

@@ -54,8 +54,8 @@ export function AIEngineering() {
         description="Building RAG pipelines, agentic workflows and MCP servers that connect AI models to real infrastructure and data — applying the same engineering rigour used for cloud systems."
       />
 
-      {/* Two pipeline visualizations side by side */}
-      <div className="mt-12 grid gap-4 md:grid-cols-2">
+      {/* Two pipeline visualizations — mt-10 consistent with other sections */}
+      <div className="mt-10 grid gap-4 md:grid-cols-2">
         {/* RAG pipeline — steps stagger in */}
         <div className="rounded-xl border border-default bg-elev p-5">
           <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted">RAG pipeline</p>
@@ -85,16 +85,13 @@ export function AIEngineering() {
           </motion.div>
         </div>
 
-        {/* Agentic flow — steps stagger in with a slight delay */}
+        {/* Agentic flow — same pipeline variant with a slight additional delay */}
         <div className="rounded-xl border border-default bg-elev p-5">
           <p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-muted">
             Agentic workflow (LangGraph + MCP)
           </p>
           <motion.div
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.055, delayChildren: prefersReduced ? 0 : 0.12 } },
-            }}
+            variants={pipeV}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-40px' }}
@@ -120,7 +117,7 @@ export function AIEngineering() {
         </div>
       </div>
 
-      {/* AI stack grid — staggered cards */}
+      {/* AI stack grid — min-h on cards so 2-col mobile layout isn't cramped */}
       <motion.div
         variants={stackV}
         initial="hidden"
@@ -132,7 +129,7 @@ export function AIEngineering() {
           <motion.div
             key={group.label}
             variants={cardV}
-            className="rounded-xl border border-default bg-elev p-4"
+            className="min-h-[96px] rounded-xl border border-default bg-elev p-4"
           >
             <p className="mb-2.5 font-mono text-[10px] uppercase tracking-widest text-muted">
               {group.label}
@@ -146,13 +143,13 @@ export function AIEngineering() {
         ))}
       </motion.div>
 
-      {/* Context note — fades in last */}
+      {/* Context note — border uses accent tint so it's visible in both themes */}
       <motion.p
         variants={noteV}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="mt-5 border-l-2 border-default pl-3 text-xs leading-relaxed text-muted"
+        className="mt-5 border-l-2 border-accent-500/30 pl-3 text-xs leading-relaxed text-muted"
       >
         AI is a supporting capability — the primary practice is SRE, DevOps, DevSecOps and cloud platform engineering. AI tooling is applied where it solves real infrastructure and operational problems.
       </motion.p>
